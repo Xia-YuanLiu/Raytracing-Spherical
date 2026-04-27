@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software in your research, please cite it using the metadata below."
+title: "Raytracing Spherical"
+type: software
+authors:
+  - family-names: "Liu"
+    given-names: "Xia-Yuan"
+repository-code: "https://github.com/Xia-YuanLiu/Raytracing-Spherical"
+url: "https://github.com/Xia-YuanLiu/Raytracing-Spherical"
+abstract: "A Python package for null-ray tracing in static, spherically symmetric spacetimes."
+license: "BSD-3-Clause"
+version: "0.1.0"

@@ -6,6 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "spherical-raytracing"
 version = "0.1.0"
 description = "Static spherical spacetime ray tracing core"
+license = { file = "LICENSE" }
 requires-python = ">=3.11"
 dependencies = [
   "numpy>=1.26",

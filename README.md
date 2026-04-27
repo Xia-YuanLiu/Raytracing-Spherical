@@ -1,6 +1,6 @@
 # Raytracing Spherical
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-blue.svg)](LICENSE)
 
 English | [中文](README.zh-CN.md)
 
@@ -129,6 +129,14 @@ public generation scripts.
 - `OdeTrajectorySolver` and `HamiltonianTrajectorySolver` are intended for
   trajectory diagnostics and cross-checks.
 
+## Citation
+
+If you use this code in academic work, please cite this repository using the
+metadata in [CITATION.cff](CITATION.cff). Please also cite the original
+scientific papers for the spacetime model, emission model, and comparison
+figures used in your analysis.
+
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE).
+This project is licensed under the BSD 3-Clause License. See
+[LICENSE](LICENSE).

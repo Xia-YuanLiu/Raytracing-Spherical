@@ -1,6 +1,6 @@
 # Raytracing Spherical
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-blue.svg)](LICENSE)
 
 [English](README.md) | 中文
 
@@ -121,6 +121,10 @@ pytest -q
 - 正面薄盘图像的主要生产路径是 `QuadTransferSolver`。
 - `OdeTrajectorySolver` 和 `HamiltonianTrajectorySolver` 主要用于轨迹诊断和交叉验证。
 
+## 引用
+
+如果你在学术工作中使用本代码，请使用 [CITATION.cff](CITATION.cff) 中的元数据引用本仓库。若你的分析使用了其中的时空模型、辐射模型或论文图像对比脚本，也请同时引用对应的原始科学论文。
+
 ## 许可证
 
-本项目使用 MIT License。详见 [LICENSE](LICENSE)。
+本项目使用 BSD 3-Clause License。详见 [LICENSE](LICENSE)。
