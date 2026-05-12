@@ -11,6 +11,7 @@ class EventType(StrEnum):
     INNER_BOUNDARY = "inner_boundary"
     OUTER_BOUNDARY = "outer_boundary"
     REGION_TRANSITION = "region_transition"
+    SHELL_CROSSING = "shell_crossing"
     FORBIDDEN_REGION = "forbidden_region"
     MAX_PHI = "max_phi"
     ESCAPE = "escape"

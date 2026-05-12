@@ -1,0 +1,259 @@
+{
+  "backend_comparison_summary": {
+    "backend_disagreement_intervals": 0,
+    "enabled": false
+  },
+  "emissivity": "paper",
+  "parameters": {
+    "family": "rn",
+    "lambda_minus": 0.0,
+    "lambda_plus": 0.0,
+    "m_minus": 0.8,
+    "m_plus": 1.0,
+    "observer_radius": 50.0,
+    "q_minus": 0.2,
+    "q_plus": 0.2,
+    "shell_radius": 2.4
+  },
+  "profile_diagnostics": {
+    "peak_count": 2,
+    "peaks": [
+      {
+        "index": 6,
+        "prominence": 0.0004064930728798818,
+        "x": 4.043167763178126,
+        "y": 0.008680541524078343
+      },
+      {
+        "index": 9,
+        "prominence": 0.010309647893921338,
+        "x": 5.090909090909091,
+        "y": 0.015232969839710394
+      }
+    ],
+    "redshift_cusp_orders": [],
+    "shell_crossing_count_max": 1,
+    "v_shape_orders": []
+  },
+  "samples": [
+    {
+      "b_plus": 0.0,
+      "intensity": 0.0,
+      "intersections": [],
+      "rho": 0.0,
+      "shell_crossing_count": 0,
+      "termination_reason": "axis"
+    },
+    {
+      "b_plus": 0.7421849255502782,
+      "intensity": 0.0,
+      "intersections": [],
+      "rho": 0.7272727272727273,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "b_plus": 1.4838991020311918,
+      "intensity": 0.0,
+      "intersections": [],
+      "rho": 1.4545454545454546,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "b_plus": 2.2246732718228737,
+      "intensity": 0.0,
+      "intersections": [],
+      "rho": 2.1818181818181817,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "b_plus": 2.964041149194301,
+      "intensity": 0.003794813617334831,
+      "intersections": [
+        {
+          "g": 0.3127326359343565,
+          "m": 1,
+          "path_class": "direct",
+          "phi": 1.5707963267948966,
+          "r": 1.9355214551759166,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.909090909090909,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "b_plus": 3.7015408788683684,
+      "intensity": 0.008011061225126969,
+      "intersections": [
+        {
+          "g": 0.5301058665437098,
+          "m": 1,
+          "path_class": "direct",
+          "phi": 1.5707963267948966,
+          "r": 2.71873827280465,
+          "region": "outer"
+        }
+      ],
+      "rho": 3.6363636363636367,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "b_plus": 4.1130808666321625,
+      "intensity": 0.008680541524078343,
+      "intersections": [
+        {
+          "g": 0.612356893822411,
+          "m": 1,
+          "path_class": "direct",
+          "phi": 1.5707963267948966,
+          "r": 3.104810404292691,
+          "region": "outer"
+        }
+      ],
+      "rho": 4.043167763178126,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "b_plus": 4.4367164621376025,
+      "intensity": 0.008274048451198461,
+      "intersections": [
+        {
+          "g": 0.6590180066279681,
+          "m": 1,
+          "path_class": "direct",
+          "phi": 1.5707963267948966,
+          "r": 3.4100577352344295,
+          "region": "outer"
+        }
+      ],
+      "rho": 4.363636363636363,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "b_plus": 5.161237581803259,
+      "intensity": 0.0,
+      "intersections": [],
+      "rho": 5.083066496709783,
+      "shell_crossing_count": 0,
+      "termination_reason": "near_critical"
+    },
+    {
+      "b_plus": 5.169119140381503,
+      "intensity": 0.015232969839710394,
+      "intersections": [
+        {
+          "g": 0.7325684272553705,
+          "m": 1,
+          "path_class": "direct",
+          "phi": 1.5707963267948966,
+          "r": 4.105304648477373,
+          "region": "outer"
+        },
+        {
+          "g": 0.6069111661671174,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "phi": 4.71238898038469,
+          "r": 3.0739926220641487,
+          "region": "outer"
+        }
+      ],
+      "rho": 5.090909090909091,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "b_plus": 5.898308726390737,
+      "intensity": 0.004923321945789057,
+      "intersections": [
+        {
+          "g": 0.7808263946801797,
+          "m": 1,
+          "path_class": "direct",
+          "phi": 1.5707963267948966,
+          "r": 4.802819593815663,
+          "region": "outer"
+        },
+        {
+          "g": 1.002337699233481,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "phi": 4.71238898038469,
+          "r": 56.33342486586591,
+          "region": "outer"
+        }
+      ],
+      "rho": 5.818181818181818,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "b_plus": 6.623854874574856,
+      "intensity": 0.003690155832577027,
+      "intersections": [
+        {
+          "g": 0.8150809836198883,
+          "m": 1,
+          "path_class": "direct",
+          "phi": 1.5707963267948966,
+          "r": 5.501636944335217,
+          "region": "outer"
+        }
+      ],
+      "rho": 6.545454545454546,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "b_plus": 7.345338281904936,
+      "intensity": 0.0028043946194275943,
+      "intersections": [
+        {
+          "g": 0.8407018491240239,
+          "m": 1,
+          "path_class": "direct",
+          "phi": 1.5707963267948966,
+          "r": 6.201156764849517,
+          "region": "outer"
+        }
+      ],
+      "rho": 7.272727272727273,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "b_plus": 8.06235181230587,
+      "intensity": 0.0021664389870256194,
+      "intersections": [
+        {
+          "g": 0.8606044668008949,
+          "m": 1,
+          "path_class": "direct",
+          "phi": 1.5707963267948966,
+          "r": 6.900986851030698,
+          "region": "outer"
+        }
+      ],
+      "rho": 8.0,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    }
+  ],
+  "sampling_diagnostics": {
+    "backend_disagreement_intervals": 0,
+    "path_class_change_intervals": 0,
+    "refine_rounds": 0,
+    "sample_count": 14,
+    "shell_crossing_change_intervals": 0,
+    "status_change_intervals": 0,
+    "unresolved_intervals": 0,
+    "unresolved_sample_count": 0
+  }
+}

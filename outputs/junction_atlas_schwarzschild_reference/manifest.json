@@ -1,0 +1,21 @@
+{
+  "families": [
+    "schwarzschild"
+  ],
+  "figure_index": {},
+  "preset": "schwarzschild-reference",
+  "reference_artifacts": {
+    "fig3_profile_json": "schwarzschild_reference/fig3_profile.json",
+    "fig3_profile_png": "schwarzschild_reference/fig3_profile.png",
+    "fig4_image_png": "schwarzschild_reference/fig4_image.png",
+    "fig4_trajectories_png": "schwarzschild_reference/fig4_trajectories.png",
+    "fig5_sweep.json": "schwarzschild_reference/fig5_sweep.json",
+    "fig5_sweep.png": "schwarzschild_reference/fig5_sweep.png",
+    "fig6_images.png": "schwarzschild_reference/fig6_images.png",
+    "fig7_sweep.json": "schwarzschild_reference/fig7_sweep.json",
+    "fig7_sweep.png": "schwarzschild_reference/fig7_sweep.png",
+    "fig8_images.png": "schwarzschild_reference/fig8_images.png"
+  },
+  "selected_case_summaries": [],
+  "selected_cases": []
+}
