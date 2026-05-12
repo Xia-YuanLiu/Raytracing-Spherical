@@ -1,0 +1,93 @@
+{
+  "backend_comparison_summary": {
+    "backend_disagreement_intervals": 0,
+    "enabled": false
+  },
+  "case_dir": "cases/rn_bf946c70886a",
+  "case_id": "rn_bf946c70886a",
+  "category_distances": {
+    "double": 0.2889438588895954,
+    "double_sphere_single_ring": 0.2889438588895954,
+    "high_charge": 0.7974889049949286,
+    "inner_only": 0.1802775637731994,
+    "large_lambda_jump": 17.420962052037307,
+    "large_q_jump": 0.6881050454618179,
+    "near_schwarzschild": 10.923844442311589,
+    "outer_only": 0.6264982043070834,
+    "rnds_observer_near_cosmological_patch": 17.488035642127898,
+    "shell_near_outer_photon_sphere": 0.5503635162326805,
+    "single_sphere_double_peak": 0.24945243244418092
+  },
+  "category_tags": [
+    "outer_only",
+    "single_sphere_double_peak"
+  ],
+  "emissivity_modes": [
+    "paper",
+    "inverse_square"
+  ],
+  "family": "rn",
+  "figure_index": {
+    "fig_case_rn_bf946c70886a_outer_only.png": {
+      "case_dir": "cases/rn_bf946c70886a",
+      "case_id": "rn_bf946c70886a",
+      "kind": "representative_case",
+      "path": "figures/fig_case_rn_bf946c70886a_outer_only.png",
+      "tag": "outer_only"
+    },
+    "fig_case_rn_bf946c70886a_single_sphere_double_peak.png": {
+      "case_dir": "cases/rn_bf946c70886a",
+      "case_id": "rn_bf946c70886a",
+      "kind": "representative_case",
+      "path": "figures/fig_case_rn_bf946c70886a_single_sphere_double_peak.png",
+      "tag": "single_sphere_double_peak"
+    }
+  },
+  "parameters": {
+    "family": "rn",
+    "lambda_minus": 0.0,
+    "lambda_plus": 0.0,
+    "m_minus": 0.95,
+    "m_plus": 1.0,
+    "observer_radius": 50.0,
+    "q_minus": 0.2,
+    "q_plus": 0.2,
+    "shell_radius": 2.4
+  },
+  "primary_emissivity": "paper",
+  "profile_diagnostics": {
+    "peak_count": 4,
+    "peaks": [
+      {
+        "index": 57,
+        "prominence": 2.9372399590159304e-07,
+        "x": 3.873684210526316,
+        "y": 0.013031241582069475
+      },
+      {
+        "index": 274,
+        "prominence": 3.939582909791295e-07,
+        "x": 5.064227329161502,
+        "y": 0.021713834453291517
+      },
+      {
+        "index": 319,
+        "prominence": 1.4969852821233864e-06,
+        "x": 5.082583084683964,
+        "y": 0.03460547065927942
+      },
+      {
+        "index": 377,
+        "prominence": 2.0597337046582287e-06,
+        "x": 5.083047410505185,
+        "y": 0.0476043919625518
+      }
+    ],
+    "redshift_cusp_orders": [],
+    "shell_crossing_count_max": 1,
+    "v_shape_orders": [
+      4
+    ]
+  },
+  "signal_score": 1.0
+}

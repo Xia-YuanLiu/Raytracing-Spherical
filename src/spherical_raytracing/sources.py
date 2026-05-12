@@ -25,6 +25,8 @@ class ThinDiskSource:
         observer: InfinityObserver | FiniteStaticObserver,
         region_metrics: dict[str, StaticSphericalMetric] | None = None,
     ) -> float:
+        if "redshift_weight" in intersection.diagnostics:
+            return float(intersection.diagnostics["redshift_weight"])
         metric = _metric_for_region(intersection.region, metric, region_metrics)
         if isinstance(observer, InfinityObserver):
             g = metric.A(intersection.r) ** 0.5

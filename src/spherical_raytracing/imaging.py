@@ -46,6 +46,8 @@ class _Sample:
     termination_reason: str | None
     path_classes: tuple[str, ...]
     unresolved: bool
+    shell_crossing_count: int | None = None
+    backend_disagreement: bool = False
 
 
 def _coerce_sample(value: Any) -> _Sample:
@@ -62,8 +64,19 @@ def _coerce_sample(value: Any) -> _Sample:
             termination_reason=diagnostics.get("termination_reason"),
             path_classes=path_classes,
             unresolved=unresolved,
+            shell_crossing_count=int(diagnostics["shell_crossing_count"])
+            if "shell_crossing_count" in diagnostics
+            else None,
+            backend_disagreement=bool(diagnostics.get("backend_disagreement", False)),
         )
-    return _Sample(intensity=float(value), termination_reason=None, path_classes=(), unresolved=False)
+    return _Sample(
+        intensity=float(value),
+        termination_reason=None,
+        path_classes=(),
+        unresolved=False,
+        shell_crossing_count=None,
+        backend_disagreement=False,
+    )
 
 
 def sample_radial_profile(
@@ -88,6 +101,8 @@ def sample_radial_profile(
     unresolved_intervals = 0
     status_change_intervals = 0
     path_class_change_intervals = 0
+    shell_crossing_change_intervals = 0
+    backend_disagreement_intervals = 0
     sample_cache: dict[float, _Sample] = {}
 
     def sample_at(x: float) -> _Sample:
@@ -99,8 +114,11 @@ def sample_radial_profile(
     for _ in range(options.max_refine):
         samples = [sample_at(x) for x in coordinates]
         new_points: list[float] = []
+        round_unresolved_intervals = 0
         round_status_changes = 0
         round_path_changes = 0
+        round_shell_crossing_changes = 0
+        round_backend_disagreements = 0
         for left_x, right_x, left_sample, right_sample in zip(
             coordinates[:-1],
             coordinates[1:],
@@ -113,25 +131,37 @@ def sample_radial_profile(
             status_changed = left_sample.termination_reason != right_sample.termination_reason
             path_changed = left_sample.path_classes != right_sample.path_classes
             unresolved = left_sample.unresolved or right_sample.unresolved
+            shell_crossing_changed = left_sample.shell_crossing_count != right_sample.shell_crossing_count
+            backend_disagreement = left_sample.backend_disagreement or right_sample.backend_disagreement
             if status_changed:
                 round_status_changes += 1
             if path_changed:
                 round_path_changes += 1
+            if unresolved:
+                round_unresolved_intervals += 1
+            if shell_crossing_changed:
+                round_shell_crossing_changes += 1
+            if backend_disagreement:
+                round_backend_disagreements += 1
             if (
                 gradient > options.absolute_gradient_threshold
                 or jump > options.relative_jump_threshold
                 or status_changed
                 or path_changed
                 or unresolved
+                or shell_crossing_changed
+                or backend_disagreement
             ):
                 new_points.append(0.5 * (left_x + right_x))
         if not new_points:
             break
         coordinates = sorted(set(coordinates + new_points))
         refine_rounds += 1
-        unresolved_intervals = len(new_points)
+        unresolved_intervals = round_unresolved_intervals
         status_change_intervals += round_status_changes
         path_class_change_intervals += round_path_changes
+        shell_crossing_change_intervals += round_shell_crossing_changes
+        backend_disagreement_intervals += round_backend_disagreements
 
     final_samples = [sample_at(x) for x in coordinates]
     intensities_array = np.array([sample.intensity for sample in final_samples])
@@ -145,6 +175,8 @@ def sample_radial_profile(
             "unresolved_intervals": unresolved_intervals if refine_rounds == options.max_refine else 0,
             "status_change_intervals": status_change_intervals,
             "path_class_change_intervals": path_class_change_intervals,
+            "shell_crossing_change_intervals": shell_crossing_change_intervals,
+            "backend_disagreement_intervals": backend_disagreement_intervals,
             "unresolved_sample_count": sum(1 for sample in final_samples if sample.unresolved),
         },
     )

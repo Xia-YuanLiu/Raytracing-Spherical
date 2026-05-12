@@ -1,0 +1,2278 @@
+{
+  "model": "rn_static_junction",
+  "parameters": {
+    "m_minus": 0.15,
+    "m_plus": 1.0,
+    "observer_radius": 50.0,
+    "q_minus": 0.05,
+    "q_plus": 0.7,
+    "shell_radius": 3.25
+  },
+  "samples": [
+    {
+      "alpha": 0.01,
+      "b_plus": 0.5102497726104027,
+      "intensity": 0,
+      "intersections": [],
+      "rho": 0.5000166673333604,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "alpha": 0.011263157894736843,
+      "b_plus": 0.5746998028238415,
+      "intensity": 0,
+      "intersections": [],
+      "rho": 0.5631817097762775,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "alpha": 0.012526315789473684,
+      "b_plus": 0.6391489160648631,
+      "intensity": 0.023700367913276375,
+      "intersections": [
+        {
+          "g": 0.22376989298599695,
+          "m": 1,
+          "path_class": "direct",
+          "r": 0.3252563352904471,
+          "region": "inner"
+        }
+      ],
+      "rho": 0.626348549638394,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "alpha": 0.013789473684210527,
+      "b_plus": 0.703597009500548,
+      "intensity": 0.07590072106063508,
+      "intersections": [
+        {
+          "g": 0.3189177907030117,
+          "m": 1,
+          "path_class": "direct",
+          "r": 0.36917692054750506,
+          "region": "inner"
+        }
+      ],
+      "rho": 0.6895173885795323,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "alpha": 0.01505263157894737,
+      "b_plus": 0.7680439802996024,
+      "intensity": 0.11942774568079458,
+      "intersections": [
+        {
+          "g": 0.3779876680297409,
+          "m": 1,
+          "path_class": "direct",
+          "r": 0.4134306258028328,
+          "region": "inner"
+        }
+      ],
+      "rho": 0.7526884282850376,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "alpha": 0.016315789473684214,
+      "b_plus": 0.8324897256325242,
+      "intensity": 0.1484005987526789,
+      "intersections": [
+        {
+          "g": 0.42002195872759124,
+          "m": 1,
+          "path_class": "direct",
+          "r": 0.45795854319533147,
+          "region": "inner"
+        }
+      ],
+      "rho": 0.8158618704683553,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "alpha": 0.017578947368421055,
+      "b_plus": 0.8969341426717669,
+      "intensity": 0.1650747196614837,
+      "intersections": [
+        {
+          "g": 0.45194176375105377,
+          "m": 1,
+          "path_class": "direct",
+          "r": 0.5027182691743529,
+          "region": "inner"
+        }
+      ],
+      "rho": 0.879037916873608,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "alpha": 0.018842105263157896,
+      "b_plus": 0.9613771285919028,
+      "intensity": 0.17285392907347943,
+      "intersections": [
+        {
+          "g": 0.4771806589729503,
+          "m": 1,
+          "path_class": "direct",
+          "r": 0.547678935011831,
+          "region": "inner"
+        }
+      ],
+      "rho": 0.9422167692781727,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "alpha": 0.020105263157894737,
+      "b_plus": 1.0258185805697881,
+      "intensity": 0.17461158787362244,
+      "intersections": [
+        {
+          "g": 0.4977129491429178,
+          "m": 1,
+          "path_class": "direct",
+          "r": 0.5928179555050991,
+          "region": "inner"
+        }
+      ],
+      "rho": 1.005398629495261,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "alpha": 0.021368421052631578,
+      "b_plus": 1.0902583957847265,
+      "intensity": 0.24824601952875464,
+      "intersections": [
+        {
+          "g": 0.5147794938979238,
+          "m": 1,
+          "path_class": "direct",
+          "r": 0.6381188427726262,
+          "region": "inner"
+        },
+        {
+          "g": 0.3187575175822752,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 0.3690785904421435,
+          "region": "inner"
+        }
+      ],
+      "rho": 1.0685836993764988,
+      "shell_crossing_count": 1,
+      "termination_reason": "horizon"
+    },
+    {
+      "alpha": 0.02263157894736842,
+      "b_plus": 1.1546964714186332,
+      "intensity": 0.33478572577552457,
+      "intersections": [
+        {
+          "g": 0.5292088833449187,
+          "m": 1,
+          "path_class": "direct",
+          "r": 0.6835697016276828,
+          "region": "inner"
+        },
+        {
+          "g": 0.5314052865978065,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 0.6911748542074053,
+          "region": "inner"
+        }
+      ],
+      "rho": 1.1317721808145058,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.023894736842105264,
+      "b_plus": 1.2191327046561993,
+      "intensity": 0.24162606119149305,
+      "intersections": [
+        {
+          "g": 0.5415795841686717,
+          "m": 1,
+          "path_class": "direct",
+          "r": 0.7291621735054695,
+          "region": "inner"
+        },
+        {
+          "g": 0.6218431106008753,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 1.3687116550814291,
+          "region": "inner"
+        }
+      ],
+      "rho": 1.1949642757454801,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.025157894736842108,
+      "b_plus": 1.2835669926850546,
+      "intensity": 0.17418905101252843,
+      "intersections": [
+        {
+          "g": 0.5523095791191868,
+          "m": 1,
+          "path_class": "direct",
+          "r": 0.7748906830613096,
+          "region": "inner"
+        },
+        {
+          "g": 0.6778939688956529,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 3.314856947391588,
+          "region": "outer"
+        }
+      ],
+      "rho": 1.2581601861517786,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.02642105263157895,
+      "b_plus": 1.3479992326959334,
+      "intensity": 0.1565824171498703,
+      "intersections": [
+        {
+          "g": 0.5617093452605759,
+          "m": 1,
+          "path_class": "direct",
+          "r": 0.8207518937080985,
+          "region": "inner"
+        },
+        {
+          "g": 0.8977303335387505,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 8.59114088483869,
+          "region": "outer"
+        }
+      ],
+      "rho": 1.3213601140645035,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.02768421052631579,
+      "b_plus": 1.4124293218828374,
+      "intensity": 0.14052790993863715,
+      "intersections": [
+        {
+          "g": 0.5700148191396204,
+          "m": 1,
+          "path_class": "direct",
+          "r": 0.8667443104620394,
+          "region": "inner"
+        }
+      ],
+      "rho": 1.3845642615660874,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.02894736842105263,
+      "b_plus": 1.476857157443201,
+      "intensity": 0.13338824134079155,
+      "intersections": [
+        {
+          "g": 0.5774087697328891,
+          "m": 1,
+          "path_class": "direct",
+          "r": 0.9128679887473776,
+          "region": "inner"
+        }
+      ],
+      "rho": 1.4477728307928808,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.030210526315789472,
+      "b_plus": 1.541282636578053,
+      "intensity": 0.1264754049885874,
+      "intersections": [
+        {
+          "g": 0.5840351308378635,
+          "m": 1,
+          "path_class": "direct",
+          "r": 0.9591243209295055,
+          "region": "inner"
+        }
+      ],
+      "rho": 1.5109860239377406,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.03147368421052632,
+      "b_plus": 1.6057056564921837,
+      "intensity": 0.11985505258537893,
+      "intersections": [
+        {
+          "g": 0.5900088877414527,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.0055158810150406,
+          "region": "inner"
+        }
+      ],
+      "rho": 1.5742040432526208,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.03273684210526316,
+      "b_plus": 1.670126114394305,
+      "intensity": 0.11356196376100973,
+      "intersections": [
+        {
+          "g": 0.5954230636404808,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.052046313791056,
+          "region": "inner"
+        }
+      ],
+      "rho": 1.6374270910511624,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.034,
+      "b_plus": 1.7345439074972189,
+      "intensity": 0.10761050693500346,
+      "intersections": [
+        {
+          "g": 0.6003537607256345,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.0987202587123455,
+          "region": "inner"
+        }
+      ],
+      "rho": 1.7006553697112896,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.035263157894736843,
+      "b_plus": 1.7989589330179778,
+      "intensity": 0.10200173045889332,
+      "intersections": [
+        {
+          "g": 0.604863864707268,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.1455433016341672,
+          "region": "inner"
+        }
+      ],
+      "rho": 1.7638890816778034,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.036526315789473685,
+      "b_plus": 1.8633710881780505,
+      "intensity": 0.09672817305471004,
+      "intersections": [
+        {
+          "g": 0.6090058115469091,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.192521949520288,
+          "region": "inner"
+        }
+      ],
+      "rho": 1.8271284294649797,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.037789473684210526,
+      "b_plus": 1.9277802702034865,
+      "intensity": 0.0917771249699334,
+      "intersections": [
+        {
+          "g": 0.6128236838500591,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.239663624715957,
+          "region": "inner"
+        }
+      ],
+      "rho": 1.8903736156591664,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.03905263157894737,
+      "b_plus": 1.992186376325077,
+      "intensity": 0.0871328328286565,
+      "intersections": [
+        {
+          "g": 0.616354820099546,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.2869766764805064,
+          "region": "inner"
+        }
+      ],
+      "rho": 1.9536248429213865,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.040315789473684215,
+      "b_plus": 2.0565893037785234,
+      "intensity": 0.08277798194603515,
+      "intersections": [
+        {
+          "g": 0.6196310645494338,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.334470408325927,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.01688231398994,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.041578947368421056,
+      "b_plus": 2.1209889498045973,
+      "intensity": 0.07869468317953796,
+      "intersections": [
+        {
+          "g": 0.622679748476938,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.3821551203916356,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.0801462316830084,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.0428421052631579,
+      "b_plus": 2.1853852116493067,
+      "intensity": 0.07486511954955007,
+      "intersections": [
+        {
+          "g": 0.6255244681307023,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.430042166660265,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.143416798901263,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.04410526315789474,
+      "b_plus": 2.2497779865640584,
+      "intensity": 0.07127195922936698,
+      "intersections": [
+        {
+          "g": 0.6281857070980611,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.4781440273281972,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.2066942186304734,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.04536842105263158,
+      "b_plus": 2.314167171805824,
+      "intensity": 0.06789860840052638,
+      "intersections": [
+        {
+          "g": 0.6306813383895787,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.5264743971220407,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.2699786939441213,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.04663157894736843,
+      "b_plus": 2.378552664637303,
+      "intensity": 0.06472935481227211,
+      "intersections": [
+        {
+          "g": 0.6330270326537865,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.5750482908267276,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.3332704280060117,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.04789473684210527,
+      "b_plus": 2.442934362327084,
+      "intensity": 0.06174943729596574,
+      "intersections": [
+        {
+          "g": 0.6352365924992245,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.623882167788209,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.396569624072891,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.04915789473684211,
+      "b_plus": 2.507312162149814,
+      "intensity": 0.05894506570891902,
+      "intersections": [
+        {
+          "g": 0.6373222281844719,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.6729940776990644,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.4598764854970665,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.05042105263157895,
+      "b_plus": 2.571685961386357,
+      "intensity": 0.056303408299701915,
+      "intersections": [
+        {
+          "g": 0.6392947864430523,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.7224038305955993,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.523191215729028,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.05168421052631579,
+      "b_plus": 2.6360556573239617,
+      "intensity": 0.053812558271910456,
+      "intersections": [
+        {
+          "g": 0.641163941596173,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.7721331947206609,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.586514018320072,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.05294736842105263,
+      "b_plus": 2.7004211472564235,
+      "intensity": 0.05146148767708943,
+      "intersections": [
+        {
+          "g": 0.6429383561327232,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.8222061267739125,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.649845096924929,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.05421052631578947,
+      "b_plus": 2.7647823284842477,
+      "intensity": 0.049239994211769014,
+      "intersections": [
+        {
+          "g": 0.6446258164334949,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.8726490401257516,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.7131846553043926,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.05547368421052632,
+      "b_plus": 2.8291390983148164,
+      "intensity": 0.04713864469908965,
+      "intersections": [
+        {
+          "g": 0.6462333481641939,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.9234911178698773,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.7765328973279546,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.05673684210526316,
+      "b_plus": 2.893491354062548,
+      "intensity": 0.0451487177742352,
+      "intersections": [
+        {
+          "g": 0.647767314972175,
+          "m": 1,
+          "path_class": "direct",
+          "r": 1.9747646792070155,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.8398900269764384,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.058,
+      "b_plus": 2.9578389930490654,
+      "intensity": 0.04326214740608541,
+      "intersections": [
+        {
+          "g": 0.6492335034314282,
+          "m": 1,
+          "path_class": "direct",
+          "r": 2.0265056096862937,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.9032562483446394,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.059263157894736844,
+      "b_plus": 3.022181912603357,
+      "intensity": 0.04147146826396122,
+      "intersections": [
+        {
+          "g": 0.6506371966426182,
+          "m": 1,
+          "path_class": "direct",
+          "r": 2.07875386841131,
+          "region": "inner"
+        }
+      ],
+      "rho": 2.966631765643966,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.060526315789473685,
+      "b_plus": 3.086520010061942,
+      "intensity": 0.03976976349976676,
+      "intersections": [
+        {
+          "g": 0.6519832384757149,
+          "m": 1,
+          "path_class": "direct",
+          "r": 2.1315540886201823,
+          "region": "inner"
+        }
+      ],
+      "rho": 3.0300167832050877,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.06178947368421053,
+      "b_plus": 3.1508531827690334,
+      "intensity": 0.03815061520669417,
+      "intersections": [
+        {
+          "g": 0.6532760901167403,
+          "m": 1,
+          "path_class": "direct",
+          "r": 2.18495629231092,
+          "region": "inner"
+        }
+      ],
+      "rho": 3.093411505480579,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.06305263157894737,
+      "b_plus": 3.2151813280767,
+      "intensity": 0.03660805759622059,
+      "intersections": [
+        {
+          "g": 0.6545198803290441,
+          "m": 1,
+          "path_class": "direct",
+          "r": 2.2390167451324103,
+          "region": "inner"
+        }
+      ],
+      "rho": 3.1568161370475725,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.06431578947368422,
+      "b_plus": 3.2795043433450353,
+      "intensity": 0.03513653277655066,
+      "intersections": [
+        {
+          "g": 0.6557184506501608,
+          "m": 1,
+          "path_class": "direct",
+          "r": 2.293798985051675,
+          "region": "inner"
+        }
+      ],
+      "rho": 3.220230882610419,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.06557894736842106,
+      "b_plus": 3.343822125942317,
+      "intensity": 0.03373084889656102,
+      "intersections": [
+        {
+          "g": 0.6568753966088672,
+          "m": 1,
+          "path_class": "direct",
+          "r": 2.349375067977861,
+          "region": "inner"
+        }
+      ],
+      "rho": 3.283655947003338,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.0668421052631579,
+      "b_plus": 3.40813457324517,
+      "intensity": 0.032386140323189753,
+      "intersections": [
+        {
+          "g": 0.6579941059584136,
+          "m": 1,
+          "path_class": "direct",
+          "r": 2.4058270864795994,
+          "region": "inner"
+        }
+      ],
+      "rho": 3.347091535193088,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.06810526315789474,
+      "b_plus": 3.472441582638735,
+      "intensity": 0.031097829433531433,
+      "intersections": [
+        {
+          "g": 0.6590777948794867,
+          "m": 1,
+          "path_class": "direct",
+          "r": 2.4632490352804752,
+          "region": "inner"
+        }
+      ],
+      "rho": 3.410537852281624,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.07063157894736842,
+      "b_plus": 3.601038877282102,
+      "intensity": 0.028673308149397257,
+      "intersections": [
+        {
+          "g": 0.6611523290403168,
+          "m": 1,
+          "path_class": "direct",
+          "r": 2.581452649046759,
+          "region": "inner"
+        }
+      ],
+      "rho": 3.537463494254915,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.0731578947368421,
+      "b_plus": 3.7296131891300104,
+      "intensity": 0.026425020579592774,
+      "intersections": [
+        {
+          "g": 0.6631226403008259,
+          "m": 1,
+          "path_class": "direct",
+          "r": 2.7050795708331106,
+          "region": "inner"
+        }
+      ],
+      "rho": 3.6644345165444276,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.07568421052631578,
+      "b_plus": 3.858163697586735,
+      "intensity": 0.024322913122290696,
+      "intersections": [
+        {
+          "g": 0.6650119796591533,
+          "m": 1,
+          "path_class": "direct",
+          "r": 2.835640322826647,
+          "region": "inner"
+        }
+      ],
+      "rho": 3.791452565105845,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.07821052631578947,
+      "b_plus": 3.986689582208469,
+      "intensity": 0.02233775654752093,
+      "intersections": [
+        {
+          "g": 0.6668447251517158,
+          "m": 1,
+          "path_class": "direct",
+          "r": 2.975292473742426,
+          "region": "inner"
+        }
+      ],
+      "rho": 3.918519288315303,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.08073684210526315,
+      "b_plus": 4.115190022708563,
+      "intensity": 0.020439330463375687,
+      "intersections": [
+        {
+          "g": 0.6686485688260745,
+          "m": 1,
+          "path_class": "direct",
+          "r": 3.127249315002961,
+          "region": "inner"
+        }
+      ],
+      "rho": 4.045636337055648,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.08326315789473684,
+      "b_plus": 4.243664198962758,
+      "intensity": 0.019149752425949036,
+      "intersections": [
+        {
+          "g": 0.6738742083103395,
+          "m": 1,
+          "path_class": "direct",
+          "r": 3.2815277969727408,
+          "region": "outer"
+        }
+      ],
+      "rho": 4.172805364802965,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.08578947368421053,
+      "b_plus": 4.372111291014421,
+      "intensity": 0.01935403015403634,
+      "intersections": [
+        {
+          "g": 0.6879216336396126,
+          "m": 1,
+          "path_class": "direct",
+          "r": 3.401670375830956,
+          "region": "outer"
+        }
+      ],
+      "rho": 4.300028027713389,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.08831578947368421,
+      "b_plus": 4.500530479079776,
+      "intensity": 0.019450379892967794,
+      "intersections": [
+        {
+          "g": 0.7008569368466707,
+          "m": 1,
+          "path_class": "direct",
+          "r": 3.522043441582784,
+          "region": "outer"
+        }
+      ],
+      "rho": 4.427305984710223,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.08957894736842105,
+      "b_plus": 4.564729352983712,
+      "intensity": 0.01946374585474279,
+      "intersections": [
+        {
+          "g": 0.7069493754064218,
+          "m": 1,
+          "path_class": "direct",
+          "r": 3.5823120804926676,
+          "region": "outer"
+        }
+      ],
+      "rho": 4.490966217682726,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.09084210526315789,
+      "b_plus": 4.6289209435531395,
+      "intensity": 0.019796953223490905,
+      "intersections": [
+        {
+          "g": 0.7128112410545984,
+          "m": 1,
+          "path_class": "direct",
+          "r": 3.642633344430673,
+          "region": "outer"
+        },
+        {
+          "g": 1.0016625603744949,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 54.3858954652205,
+          "region": "outer"
+        }
+      ],
+      "rho": 4.554640897571343,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.09336842105263157,
+      "b_plus": 4.75728186501215,
+      "intensity": 0.022100035448017807,
+      "intersections": [
+        {
+          "g": 0.723895086724433,
+          "m": 1,
+          "path_class": "direct",
+          "r": 3.763427938165951,
+          "region": "outer"
+        },
+        {
+          "g": 0.9622473361004791,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 17.78009019015669,
+          "region": "outer"
+        }
+      ],
+      "rho": 4.682034431016928,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.09463157894736841,
+      "b_plus": 4.821450991093197,
+      "intensity": 0.024472416420846126,
+      "intersections": [
+        {
+          "g": 0.729140518572709,
+          "m": 1,
+          "path_class": "direct",
+          "r": 3.823898564520784,
+          "region": "outer"
+        },
+        {
+          "g": 0.9348728378410318,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 12.187710264376662,
+          "region": "outer"
+        }
+      ],
+      "rho": 4.74575370151015,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.09589473684210525,
+      "b_plus": 4.885612424222995,
+      "intensity": 0.02823883207644167,
+      "intersections": [
+        {
+          "g": 0.7342024723275887,
+          "m": 1,
+          "path_class": "direct",
+          "r": 3.8844163993481695,
+          "region": "outer"
+        },
+        {
+          "g": 0.8959022285339037,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 8.469614065758423,
+          "region": "outer"
+        }
+      ],
+      "rho": 4.809488252797517,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.0971578947368421,
+      "b_plus": 4.949766062027634,
+      "intensity": 0.03622274041011486,
+      "intersections": [
+        {
+          "g": 0.7390906194559874,
+          "m": 1,
+          "path_class": "direct",
+          "r": 3.9449802709439843,
+          "region": "outer"
+        },
+        {
+          "g": 0.7964378468835486,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 4.857928165832803,
+          "region": "outer"
+        }
+      ],
+      "rho": 4.873238293835838,
+      "shell_crossing_count": 2,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.09842105263157894,
+      "b_plus": 5.013911802145645,
+      "intensity": 0.0344726223289504,
+      "intersections": [
+        {
+          "g": 0.7438139445658001,
+          "m": 1,
+          "path_class": "direct",
+          "r": 4.005589072072843,
+          "region": "outer"
+        },
+        {
+          "g": 0.8226153156182552,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 5.4538586484572935,
+          "region": "outer"
+        }
+      ],
+      "rho": 4.93700403378239,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.09968421052631579,
+      "b_plus": 5.07804954222816,
+      "intensity": 0.031700925300992736,
+      "intersections": [
+        {
+          "g": 0.7483808072975177,
+          "m": 1,
+          "path_class": "direct",
+          "r": 4.066241756233986,
+          "region": "outer"
+        },
+        {
+          "g": 0.8560957784517153,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 6.495942586028892,
+          "region": "outer"
+        }
+      ],
+      "rho": 5.000785681997695,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.10094736842105263,
+      "b_plus": 5.142179179939077,
+      "intensity": 0.028883544462636655,
+      "intersections": [
+        {
+          "g": 0.7527989974135234,
+          "m": 1,
+          "path_class": "direct",
+          "r": 4.126937334179743,
+          "region": "outer"
+        },
+        {
+          "g": 0.8852243964579023,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 7.825635481554584,
+          "region": "outer"
+        }
+      ],
+      "rho": 5.064583448048305,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.10221052631578947,
+      "b_plus": 5.206300612955217,
+      "intensity": 0.026243145068300704,
+      "intersections": [
+        {
+          "g": 0.757075783972478,
+          "m": 1,
+          "path_class": "direct",
+          "r": 4.187674870698264,
+          "region": "outer"
+        },
+        {
+          "g": 0.910708202451528,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 9.57060825949758,
+          "region": "outer"
+        }
+      ],
+      "rho": 5.128397541709597,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.10347368421052631,
+      "b_plus": 5.270413738966497,
+      "intensity": 0.02391377128002629,
+      "intersections": [
+        {
+          "g": 0.7612179593345137,
+          "m": 1,
+          "path_class": "direct",
+          "r": 4.248453481554838,
+          "region": "outer"
+        },
+        {
+          "g": 0.9331062815898922,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 11.947260582334968,
+          "region": "outer"
+        }
+      ],
+      "rho": 5.192228172968574,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.10473684210526316,
+      "b_plus": 5.334518455676089,
+      "intensity": 0.021962590430612612,
+      "intersections": [
+        {
+          "g": 0.7652318786480633,
+          "m": 1,
+          "path_class": "direct",
+          "r": 4.309272330703454,
+          "region": "outer"
+        },
+        {
+          "g": 0.9528692508018708,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 15.35400955381069,
+          "region": "outer"
+        }
+      ],
+      "rho": 5.256075552026662,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.106,
+      "b_plus": 5.398614660800577,
+      "intensity": 0.020409525791480088,
+      "intersections": [
+        {
+          "g": 0.7691234953598687,
+          "m": 1,
+          "path_class": "direct",
+          "r": 4.370130627643796,
+          "region": "outer"
+        },
+        {
+          "g": 0.9703657803873006,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 20.61361760294696,
+          "region": "outer"
+        }
+      ],
+      "rho": 5.319939889302525,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.10852631578947368,
+      "b_plus": 5.5267811272286655,
+      "intensity": 0.018433271799123126,
+      "intersections": [
+        {
+          "g": 0.776561815218486,
+          "m": 1,
+          "path_class": "direct",
+          "r": 4.491962616020611,
+          "region": "outer"
+        },
+        {
+          "g": 0.9997306338048862,
+          "m": 2,
+          "path_class": "lensing_ring",
+          "r": 49.355452724314524,
+          "region": "outer"
+        }
+      ],
+      "rho": 5.44772028128532,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.10978947368421052,
+      "b_plus": 5.590851184033997,
+      "intensity": 0.017867337588706796,
+      "intersections": [
+        {
+          "g": 0.7801186897168323,
+          "m": 1,
+          "path_class": "direct",
+          "r": 4.552934932819328,
+          "region": "outer"
+        }
+      ],
+      "rho": 5.5116367579411385,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.11105263157894736,
+      "b_plus": 5.654912320258015,
+      "intensity": 0.017708210430368455,
+      "intersections": [
+        {
+          "g": 0.7835736542299918,
+          "m": 1,
+          "path_class": "direct",
+          "r": 4.613943943960235,
+          "region": "outer"
+        }
+      ],
+      "rho": 5.575571036718169,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.11357894736842104,
+      "b_plus": 5.783007422121003,
+      "intensity": 0.01738205452740564,
+      "intersections": [
+        {
+          "g": 0.7901950765191237,
+          "m": 1,
+          "path_class": "direct",
+          "r": 4.73606969548806,
+          "region": "outer"
+        }
+      ],
+      "rho": 5.703493847058934,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.11610526315789474,
+      "b_plus": 5.911065615280352,
+      "intensity": 0.017048132595468366,
+      "intersections": [
+        {
+          "g": 0.7964581378517899,
+          "m": 1,
+          "path_class": "direct",
+          "r": 4.8583354825489495,
+          "region": "outer"
+        }
+      ],
+      "rho": 5.8314904075131455,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.11863157894736842,
+      "b_plus": 6.039086082434341,
+      "intensity": 0.016709284417370022,
+      "intersections": [
+        {
+          "g": 0.8023914365149906,
+          "m": 1,
+          "path_class": "direct",
+          "r": 4.980737393170338,
+          "region": "outer"
+        }
+      ],
+      "rho": 5.959562417125427,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.1211578947368421,
+      "b_plus": 6.167068006522034,
+      "intensity": 0.016367873227236245,
+      "intersections": [
+        {
+          "g": 0.8080205741377802,
+          "m": 1,
+          "path_class": "direct",
+          "r": 5.103271945668429,
+          "region": "outer"
+        }
+      ],
+      "rho": 6.087711578871358,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.12368421052631579,
+      "b_plus": 6.29501057072848,
+      "intensity": 0.016025858645251956,
+      "intersections": [
+        {
+          "g": 0.8133685434947175,
+          "m": 1,
+          "path_class": "direct",
+          "r": 5.225936048091646,
+          "region": "outer"
+        }
+      ],
+      "rho": 6.215939599749765,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.12621052631578947,
+      "b_plus": 6.422912958489936,
+      "intensity": 0.015684858665830418,
+      "intersections": [
+        {
+          "g": 0.8184560566777248,
+          "m": 1,
+          "path_class": "direct",
+          "r": 5.3487269622161016,
+          "region": "outer"
+        }
+      ],
+      "rho": 6.344248190875472,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.12873684210526315,
+      "b_plus": 6.5507743534990786,
+      "intensity": 0.015346202291148423,
+      "intersections": [
+        {
+          "g": 0.8233018242409067,
+          "m": 1,
+          "path_class": "direct",
+          "r": 5.471642271508604,
+          "region": "outer"
+        }
+      ],
+      "rho": 6.472639067572494,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.13126315789473686,
+      "b_plus": 6.678593939710206,
+      "intensity": 0.01501097419528305,
+      "intersections": [
+        {
+          "g": 0.8279227937858594,
+          "m": 1,
+          "path_class": "direct",
+          "r": 5.5946798525570145,
+          "region": "outer"
+        }
+      ],
+      "rho": 6.601113949467729,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.13378947368421054,
+      "b_plus": 6.806370901344454,
+      "intensity": 0.014680052613694757,
+      "intersections": [
+        {
+          "g": 0.832334354798129,
+          "m": 1,
+          "path_class": "direct",
+          "r": 5.717837849538671,
+          "region": "outer"
+        }
+      ],
+      "rho": 6.7296745605850985,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.13631578947368422,
+      "b_plus": 6.934104422895003,
+      "intensity": 0.01435414148201524,
+      "intersections": [
+        {
+          "g": 0.8365505152500814,
+          "m": 1,
+          "path_class": "direct",
+          "r": 5.841114651357333,
+          "region": "outer"
+        }
+      ],
+      "rho": 6.858322629440209,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.1388421052631579,
+      "b_plus": 7.061793689132271,
+      "intensity": 0.014033797697765965,
+      "intersections": [
+        {
+          "g": 0.8405840544647519,
+          "m": 1,
+          "path_class": "direct",
+          "r": 5.964508871129657,
+          "region": "outer"
+        }
+      ],
+      "rho": 6.987059889135505,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.1413684210526316,
+      "b_plus": 7.189437885109135,
+      "intensity": 0.013719454247978841,
+      "intersections": [
+        {
+          "g": 0.8444466559251314,
+          "m": 1,
+          "path_class": "direct",
+          "r": 6.088019327745143,
+          "region": "outer"
+        }
+      ],
+      "rho": 7.115888077455942,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.14389473684210527,
+      "b_plus": 7.317036196166118,
+      "intensity": 0.01341143983316127,
+      "intersections": [
+        {
+          "g": 0.8481490230660091,
+          "m": 1,
+          "path_class": "direct",
+          "r": 6.211645029259925,
+          "region": "outer"
+        }
+      ],
+      "rho": 7.244808936965182,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.14642105263157895,
+      "b_plus": 7.444587807936592,
+      "intensity": 0.013109995521754552,
+      "intersections": [
+        {
+          "g": 0.851700980564926,
+          "m": 1,
+          "path_class": "direct",
+          "r": 6.335385157916004,
+          "region": "outer"
+        }
+      ],
+      "rho": 7.37382421510233,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.14894736842105263,
+      "b_plus": 7.572091906351977,
+      "intensity": 0.012815288887220859,
+      "intersections": [
+        {
+          "g": 0.8551115632276732,
+          "m": 1,
+          "path_class": "direct",
+          "r": 6.459239056604193,
+          "region": "outer"
+        }
+      ],
+      "rho": 7.50293566427923,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.15147368421052632,
+      "b_plus": 7.699547677646937,
+      "intensity": 0.012527426010274472,
+      "intersections": [
+        {
+          "g": 0.8583890942211785,
+          "m": 1,
+          "path_class": "direct",
+          "r": 6.583206216611851,
+          "region": "outer"
+        }
+      ],
+      "rho": 7.632145041978307,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.154,
+      "b_plus": 7.82695430836457,
+      "intensity": 0.012246461669815177,
+      "intersections": [
+        {
+          "g": 0.8615412541264559,
+          "m": 1,
+          "path_class": "direct",
+          "r": 6.707286266516302,
+          "region": "outer"
+        }
+      ],
+      "rho": 7.761454110850999,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.1565263157894737,
+      "b_plus": 7.9543109853616105,
+      "intensity": 0.011972407996272439,
+      "intersections": [
+        {
+          "g": 0.8645751420540108,
+          "m": 1,
+          "path_class": "direct",
+          "r": 6.831478962101692,
+          "region": "outer"
+        }
+      ],
+      "rho": 7.890864638816765,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.1590526315789474,
+      "b_plus": 8.0816168958136,
+      "intensity": 0.011705241818964636,
+      "intersections": [
+        {
+          "g": 0.8674973298739345,
+          "m": 1,
+          "path_class": "direct",
+          "r": 6.955784177191814,
+          "region": "outer"
+        }
+      ],
+      "rho": 8.020378399162693,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.16157894736842107,
+      "b_plus": 8.208871227220088,
+      "intensity": 0.01144491090353578,
+      "intersections": [
+        {
+          "g": 0.8703139104551829,
+          "m": 1,
+          "path_class": "direct",
+          "r": 7.080201895304144,
+          "region": "outer"
+        }
+      ],
+      "rho": 8.149997170643728,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.16410526315789475,
+      "b_plus": 8.336073167409825,
+      "intensity": 0.011191339245537222,
+      "intersections": [
+        {
+          "g": 0.8730305406771421,
+          "m": 1,
+          "path_class": "direct",
+          "r": 7.2047322020413676,
+          "region": "outer"
+        }
+      ],
+      "rho": 8.279722737583507,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.16663157894736844,
+      "b_plus": 8.463221904545923,
+      "intensity": 0.010944431560905816,
+      "intersections": [
+        {
+          "g": 0.8756524798666739,
+          "m": 1,
+          "path_class": "direct",
+          "r": 7.329375278146263,
+          "region": "outer"
+        }
+      ],
+      "rho": 8.409556889975848,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.16915789473684212,
+      "b_plus": 8.590316627131061,
+      "intensity": 0.010704077092718775,
+      "intersections": [
+        {
+          "g": 0.8781846242215758,
+          "m": 1,
+          "path_class": "direct",
+          "r": 7.454131393154367,
+          "region": "outer"
+        }
+      ],
+      "rho": 8.539501423586868,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.1716842105263158,
+      "b_plus": 8.717356524012647,
+      "intensity": 0.010470152835555843,
+      "intersections": [
+        {
+          "g": 0.8806315377036212,
+          "m": 1,
+          "path_class": "direct",
+          "r": 7.579000899585946,
+          "region": "outer"
+        }
+      ],
+      "rho": 8.669558140057783,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.17421052631578948,
+      "b_plus": 8.844340784388,
+      "intensity": 0.01024252626354627,
+      "intersections": [
+        {
+          "g": 0.8829974798186055,
+          "m": 1,
+          "path_class": "direct",
+          "r": 7.703984227625447,
+          "region": "outer"
+        }
+      ],
+      "rho": 8.799728847008355,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.17673684210526316,
+      "b_plus": 8.971268597809537,
+      "intensity": 0.010021057635279879,
+      "intersections": [
+        {
+          "g": 0.8852864306450262,
+          "m": 1,
+          "path_class": "direct",
+          "r": 7.829081880242145,
+          "region": "outer"
+        }
+      ],
+      "rho": 8.930015358141059,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.17926315789473685,
+      "b_plus": 9.098139154189917,
+      "intensity": 0.009805601937846393,
+      "intersections": [
+        {
+          "g": 0.8875021134255422,
+          "m": 1,
+          "path_class": "direct",
+          "r": 7.9542944287106145,
+          "region": "outer"
+        }
+      ],
+      "rho": 9.06041949334592,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.18178947368421053,
+      "b_plus": 9.224951643807243,
+      "intensity": 0.009596010523022187,
+      "intersections": [
+        {
+          "g": 0.8896480149948183,
+          "m": 1,
+          "path_class": "direct",
+          "r": 8.079622508494191,
+          "region": "outer"
+        }
+      ],
+      "rho": 9.190943078806082,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.1843157894736842,
+      "b_plus": 9.351705257310215,
+      "intensity": 0.009392132480787355,
+      "intersections": [
+        {
+          "g": 0.8917274042826361,
+          "m": 1,
+          "path_class": "direct",
+          "r": 8.205066815458254,
+          "region": "outer"
+        }
+      ],
+      "rho": 9.321587947104094,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.1868421052631579,
+      "b_plus": 9.478399185723287,
+      "intensity": 0.009193815788707024,
+      "intersections": [
+        {
+          "g": 0.893743349101349,
+          "m": 1,
+          "path_class": "direct",
+          "r": 8.330628102383685,
+          "region": "outer"
+        }
+      ],
+      "rho": 9.452355937328942,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.1893684210526316,
+      "b_plus": 9.605032620451848,
+      "intensity": 0.009000908270064297,
+      "intersections": [
+        {
+          "g": 0.8956987314010831,
+          "m": 1,
+          "path_class": "direct",
+          "r": 8.456307175753905,
+          "region": "outer"
+        }
+      ],
+      "rho": 9.583248895183836,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.19189473684210528,
+      "b_plus": 9.731604753287366,
+      "intensity": 0.008813258388833341,
+      "intersections": [
+        {
+          "g": 0.8975962611539274,
+          "m": 1,
+          "path_class": "direct",
+          "r": 8.582104892791428,
+          "region": "outer"
+        }
+      ],
+      "rho": 9.71426867309475,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.19442105263157897,
+      "b_plus": 9.85811477641256,
+      "intensity": 0.008630715905497459,
+      "intersections": [
+        {
+          "g": 0.8994384890091787,
+          "m": 1,
+          "path_class": "direct",
+          "r": 8.708022158722425,
+          "region": "outer"
+        }
+      ],
+      "rho": 9.845417130319776,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.19694736842105265,
+      "b_plus": 9.984561882406553,
+      "intensity": 0.008453132414240143,
+      "intersections": [
+        {
+          "g": 0.9012278178450644,
+          "m": 1,
+          "path_class": "direct",
+          "r": 8.834059924249773,
+          "region": "outer"
+        }
+      ],
+      "rho": 9.97669613305923,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.19947368421052633,
+      "b_plus": 10.11094526425001,
+      "intensity": 0.008280361779073278,
+      "intersections": [
+        {
+          "g": 0.9029665133278995,
+          "m": 1,
+          "path_class": "direct",
+          "r": 8.960219183216989,
+          "region": "outer"
+        }
+      ],
+      "rho": 10.108107554566617,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.202,
+      "b_plus": 10.237264115330317,
+      "intensity": 0.00811226048395825,
+      "intersections": [
+        {
+          "g": 0.9046567135768221,
+          "m": 1,
+          "path_class": "direct",
+          "r": 9.086500970432054,
+          "region": "outer"
+        }
+      ],
+      "rho": 10.239653275260377,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.2045263157894737,
+      "b_plus": 10.363517629446694,
+      "intensity": 0.007948687909634197,
+      "intersections": [
+        {
+          "g": 0.9063004380230728,
+          "m": 1,
+          "path_class": "direct",
+          "r": 9.21290635976114,
+          "region": "outer"
+        }
+      ],
+      "rho": 10.371335182836502,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.20705263157894738,
+      "b_plus": 10.489705000815377,
+      "intensity": 0.007789506548754778,
+      "intersections": [
+        {
+          "g": 0.9078995955357849,
+          "m": 1,
+          "path_class": "direct",
+          "r": 9.339436462042553,
+          "region": "outer"
+        }
+      ],
+      "rho": 10.503155172381993,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.20957894736842106,
+      "b_plus": 10.615825424074728,
+      "intensity": 0.007634582167682024,
+      "intersections": [
+        {
+          "g": 0.9094559918946308,
+          "m": 1,
+          "path_class": "direct",
+          "r": 9.466092423658663,
+          "region": "outer"
+        }
+      ],
+      "rho": 10.635115146489186,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.21210526315789474,
+      "b_plus": 10.741878094290403,
+      "intensity": 0.007483783924331489,
+      "intersections": [
+        {
+          "g": 0.9109713366581558,
+          "m": 1,
+          "path_class": "direct",
+          "r": 9.592875424763049,
+          "region": "outer"
+        }
+      ],
+      "rho": 10.767217015370973,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.21463157894736842,
+      "b_plus": 10.867862206960462,
+      "intensity": 0.0073369844481089705,
+      "intersections": [
+        {
+          "g": 0.9124472494921676,
+          "m": 1,
+          "path_class": "direct",
+          "r": 9.719786677849173,
+          "region": "outer"
+        }
+      ],
+      "rho": 10.899462696976912,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.2171578947368421,
+      "b_plus": 10.99377695802053,
+      "intensity": 0.007194059888249566,
+      "intersections": [
+        {
+          "g": 0.9138852660040974,
+          "m": 1,
+          "path_class": "direct",
+          "r": 9.846827426379503,
+          "region": "outer"
+        }
+      ],
+      "rho": 11.031854117110262,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.2196842105263158,
+      "b_plus": 11.119621543848908,
+      "intensity": 0.007054889935603464,
+      "intersections": [
+        {
+          "g": 0.9152868431283184,
+          "m": 1,
+          "path_class": "direct",
+          "r": 9.973998943512633,
+          "region": "outer"
+        }
+      ],
+      "rho": 11.164393209545942,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.2222105263157895,
+      "b_plus": 11.245395161271716,
+      "intensity": 0.006919357822242922,
+      "intersections": [
+        {
+          "g": 0.9166533641022993,
+          "m": 1,
+          "path_class": "direct",
+          "r": 10.101302530921162,
+          "region": "outer"
+        }
+      ],
+      "rho": 11.297081916149445,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.22473684210526318,
+      "b_plus": 11.371097007568011,
+      "intensity": 0.006787350302610429,
+      "intersections": [
+        {
+          "g": 0.9179861430697359,
+          "m": 1,
+          "path_class": "direct",
+          "r": 10.22873951772053,
+          "region": "outer"
+        }
+      ],
+      "rho": 11.429922186996704,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.22726315789473686,
+      "b_plus": 11.49672628047491,
+      "intensity": 0.006658757620107653,
+      "intersections": [
+        {
+          "g": 0.9192864293359864,
+          "m": 1,
+          "path_class": "direct",
+          "r": 10.35631125881307,
+          "region": "outer"
+        }
+      ],
+      "rho": 11.562915980494955,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.22978947368421054,
+      "b_plus": 11.622282178192718,
+      "intensity": 0.006533473457811419,
+      "intersections": [
+        {
+          "g": 0.9205554113460335,
+          "m": 1,
+          "path_class": "direct",
+          "r": 10.484019136708543,
+          "region": "outer"
+        }
+      ],
+      "rho": 11.696065263504584,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.23231578947368423,
+      "b_plus": 11.747763899390034,
+      "intensity": 0.006411394887065435,
+      "intersections": [
+        {
+          "g": 0.9217942202959384,
+          "m": 1,
+          "path_class": "direct",
+          "r": 10.611864555376304,
+          "region": "outer"
+        }
+      ],
+      "rho": 11.829372011461995,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.2348421052631579,
+      "b_plus": 11.873170643208882,
+      "intensity": 0.006292422297599576,
+      "intersections": [
+        {
+          "g": 0.9230039335873217,
+          "m": 1,
+          "path_class": "direct",
+          "r": 10.739848944555202,
+          "region": "outer"
+        }
+      ],
+      "rho": 11.962838208503499,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.2373684210526316,
+      "b_plus": 11.998501609269796,
+      "intensity": 0.006176459328849818,
+      "intersections": [
+        {
+          "g": 0.9241855779646645,
+          "m": 1,
+          "path_class": "direct",
+          "r": 10.867973756467947,
+          "region": "outer"
+        }
+      ],
+      "rho": 12.096465847590254,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.23989473684210527,
+      "b_plus": 12.123755997676959,
+      "intensity": 0.00606341279344035,
+      "intersections": [
+        {
+          "g": 0.9253401324611796,
+          "m": 1,
+          "path_class": "direct",
+          "r": 10.996240465466792,
+          "region": "outer"
+        }
+      ],
+      "rho": 12.230256930634287,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.24242105263157895,
+      "b_plus": 12.248933009023286,
+      "intensity": 0.005953192596694009,
+      "intersections": [
+        {
+          "g": 0.9264685311445046,
+          "m": 1,
+          "path_class": "direct",
+          "r": 11.12465056809042,
+          "region": "outer"
+        }
+      ],
+      "rho": 12.364213468625572,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.24494736842105264,
+      "b_plus": 12.374031844395532,
+      "intensity": 0.0058457116553099955,
+      "intersections": [
+        {
+          "g": 0.9275716656569458,
+          "m": 1,
+          "path_class": "direct",
+          "r": 11.253205581057442,
+          "region": "outer"
+        }
+      ],
+      "rho": 12.498337481760226,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.24747368421052632,
+      "b_plus": 12.499051705379392,
+      "intensity": 0.005740885811882992,
+      "intersections": [
+        {
+          "g": 0.9286503876080447,
+          "m": 1,
+          "path_class": "direct",
+          "r": 11.381907042032186,
+          "region": "outer"
+        }
+      ],
+      "rho": 12.632630999569816,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    },
+    {
+      "alpha": 0.25,
+      "b_plus": 12.623991794064606,
+      "intensity": 0.005638633750084864,
+      "intersections": [
+        {
+          "g": 0.9297055107912144,
+          "m": 1,
+          "path_class": "direct",
+          "r": 11.510756508488612,
+          "region": "outer"
+        }
+      ],
+      "rho": 12.767096061051813,
+      "shell_crossing_count": 0,
+      "termination_reason": "escape"
+    }
+  ],
+  "sampling_diagnostics": {
+    "backend_disagreement_intervals": 0,
+    "path_class_change_intervals": 5,
+    "refine_rounds": 1,
+    "sample_count": 126,
+    "shell_crossing_change_intervals": 2,
+    "status_change_intervals": 1,
+    "unresolved_intervals": 0,
+    "unresolved_sample_count": 0
+  },
+  "warnings": [
+    "charge_mismatch_surface_source"
+  ]
+}

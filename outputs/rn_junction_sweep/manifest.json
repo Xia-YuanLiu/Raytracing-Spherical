@@ -1,0 +1,305 @@
+{
+  "case_count": 10,
+  "cases": [
+    {
+      "description": "Small equal charges; baseline close to the Schwarzschild junction image.",
+      "image": "small_charge_schwarzschild_limit.png",
+      "name": "small_charge_schwarzschild_limit",
+      "outer_critical_impact_parameter": 5.195805985597799,
+      "outer_photon_sphere_radius": 2.9997333096254146,
+      "parameters": {
+        "m_minus": 0.1,
+        "m_plus": 1.0,
+        "observer_radius": 50.0,
+        "q_minus": 0.02,
+        "q_plus": 0.02,
+        "shell_radius": 3.1
+      },
+      "profile": "small_charge_schwarzschild_limit.json",
+      "sample_count": 128,
+      "sampling_diagnostics": {
+        "backend_disagreement_intervals": 0,
+        "path_class_change_intervals": 5,
+        "refine_rounds": 1,
+        "sample_count": 128,
+        "shell_crossing_change_intervals": 2,
+        "status_change_intervals": 1,
+        "unresolved_intervals": 0,
+        "unresolved_sample_count": 0
+      },
+      "warnings": []
+    },
+    {
+      "description": "Equal moderate charges isolate charge effects without a surface charge jump.",
+      "image": "equal_moderate_charge.png",
+      "name": "equal_moderate_charge",
+      "outer_critical_impact_parameter": 5.141351083290203,
+      "outer_photon_sphere_radius": 2.957737973711325,
+      "parameters": {
+        "m_minus": 0.4,
+        "m_plus": 1.0,
+        "observer_radius": 50.0,
+        "q_minus": 0.25,
+        "q_plus": 0.25,
+        "shell_radius": 3.4
+      },
+      "profile": "equal_moderate_charge.json",
+      "sample_count": 117,
+      "sampling_diagnostics": {
+        "backend_disagreement_intervals": 0,
+        "path_class_change_intervals": 3,
+        "refine_rounds": 1,
+        "sample_count": 117,
+        "shell_crossing_change_intervals": 2,
+        "status_change_intervals": 1,
+        "unresolved_intervals": 0,
+        "unresolved_sample_count": 0
+      },
+      "warnings": []
+    },
+    {
+      "description": "Exterior charge exceeds interior charge, so the shell carries positive surface charge.",
+      "image": "outer_surface_charge_dominant.png",
+      "name": "outer_surface_charge_dominant",
+      "outer_critical_impact_parameter": 4.916561436840653,
+      "outer_photon_sphere_radius": 2.7825755338380658,
+      "parameters": {
+        "m_minus": 0.35,
+        "m_plus": 1.0,
+        "observer_radius": 50.0,
+        "q_minus": 0.05,
+        "q_plus": 0.55,
+        "shell_radius": 3.3
+      },
+      "profile": "outer_surface_charge_dominant.json",
+      "sample_count": 119,
+      "sampling_diagnostics": {
+        "backend_disagreement_intervals": 0,
+        "path_class_change_intervals": 5,
+        "refine_rounds": 1,
+        "sample_count": 119,
+        "shell_crossing_change_intervals": 2,
+        "status_change_intervals": 1,
+        "unresolved_intervals": 0,
+        "unresolved_sample_count": 0
+      },
+      "warnings": [
+        "charge_mismatch_surface_source"
+      ]
+    },
+    {
+      "description": "Interior charge exceeds exterior charge while both sides remain subextremal.",
+      "image": "inner_surface_charge_dominant.png",
+      "name": "inner_surface_charge_dominant",
+      "outer_critical_impact_parameter": 5.176580826653038,
+      "outer_photon_sphere_radius": 2.9849242404917495,
+      "parameters": {
+        "m_minus": 0.7,
+        "m_plus": 1.0,
+        "observer_radius": 50.0,
+        "q_minus": 0.62,
+        "q_plus": 0.15,
+        "shell_radius": 3.6
+      },
+      "profile": "inner_surface_charge_dominant.json",
+      "sample_count": 114,
+      "sampling_diagnostics": {
+        "backend_disagreement_intervals": 0,
+        "path_class_change_intervals": 3,
+        "refine_rounds": 1,
+        "sample_count": 114,
+        "shell_crossing_change_intervals": 2,
+        "status_change_intervals": 1,
+        "unresolved_intervals": 0,
+        "unresolved_sample_count": 0
+      },
+      "warnings": [
+        "charge_mismatch_surface_source"
+      ]
+    },
+    {
+      "description": "Near-extremal exterior RN metric, changing the outer photon-sphere scale.",
+      "image": "near_extremal_outer_charge.png",
+      "name": "near_extremal_outer_charge",
+      "outer_critical_impact_parameter": 4.144132556122654,
+      "outer_photon_sphere_radius": 2.137808748764079,
+      "parameters": {
+        "m_minus": 0.45,
+        "m_plus": 1.0,
+        "observer_radius": 50.0,
+        "q_minus": 0.2,
+        "q_plus": 0.96,
+        "shell_radius": 3.15
+      },
+      "profile": "near_extremal_outer_charge.json",
+      "sample_count": 115,
+      "sampling_diagnostics": {
+        "backend_disagreement_intervals": 0,
+        "path_class_change_intervals": 4,
+        "refine_rounds": 1,
+        "sample_count": 115,
+        "shell_crossing_change_intervals": 2,
+        "status_change_intervals": 1,
+        "unresolved_intervals": 0,
+        "unresolved_sample_count": 0
+      },
+      "warnings": [
+        "charge_mismatch_surface_source"
+      ]
+    },
+    {
+      "description": "Near-extremal interior RN metric probes strong inner redshift matching.",
+      "image": "near_extremal_inner_charge.png",
+      "name": "near_extremal_inner_charge",
+      "outer_critical_impact_parameter": 5.141351083290203,
+      "outer_photon_sphere_radius": 2.957737973711325,
+      "parameters": {
+        "m_minus": 0.85,
+        "m_plus": 1.0,
+        "observer_radius": 50.0,
+        "q_minus": 0.8,
+        "q_plus": 0.25,
+        "shell_radius": 3.75
+      },
+      "profile": "near_extremal_inner_charge.json",
+      "sample_count": 112,
+      "sampling_diagnostics": {
+        "backend_disagreement_intervals": 0,
+        "path_class_change_intervals": 5,
+        "refine_rounds": 1,
+        "sample_count": 112,
+        "shell_crossing_change_intervals": 2,
+        "status_change_intervals": 1,
+        "unresolved_intervals": 0,
+        "unresolved_sample_count": 0
+      },
+      "warnings": [
+        "charge_mismatch_surface_source"
+      ]
+    },
+    {
+      "description": "Shell just outside the outer unstable photon sphere, emphasizing shell-crossing features.",
+      "image": "shell_near_outer_photon_sphere.png",
+      "name": "shell_near_outer_photon_sphere",
+      "outer_critical_impact_parameter": 5.01325345001919,
+      "outer_photon_sphere_radius": 2.8583077707206126,
+      "parameters": {
+        "m_minus": 0.2,
+        "m_plus": 1.0,
+        "observer_radius": 50.0,
+        "q_minus": 0.1,
+        "q_plus": 0.45,
+        "shell_radius": 2.95
+      },
+      "profile": "shell_near_outer_photon_sphere.json",
+      "sample_count": 124,
+      "sampling_diagnostics": {
+        "backend_disagreement_intervals": 0,
+        "path_class_change_intervals": 7,
+        "refine_rounds": 1,
+        "sample_count": 124,
+        "shell_crossing_change_intervals": 2,
+        "status_change_intervals": 1,
+        "unresolved_intervals": 0,
+        "unresolved_sample_count": 0
+      },
+      "warnings": [
+        "charge_mismatch_surface_source"
+      ]
+    },
+    {
+      "description": "Larger shell radius weakens the junction redshift discontinuity.",
+      "image": "large_shell_weak_matching.png",
+      "name": "large_shell_weak_matching",
+      "outer_critical_impact_parameter": 5.161237581803259,
+      "outer_photon_sphere_radius": 2.9730919862656235,
+      "parameters": {
+        "m_minus": 0.6,
+        "m_plus": 1.0,
+        "observer_radius": 50.0,
+        "q_minus": 0.2,
+        "q_plus": 0.2,
+        "shell_radius": 8.0
+      },
+      "profile": "large_shell_weak_matching.json",
+      "sample_count": 110,
+      "sampling_diagnostics": {
+        "backend_disagreement_intervals": 0,
+        "path_class_change_intervals": 3,
+        "refine_rounds": 1,
+        "sample_count": 110,
+        "shell_crossing_change_intervals": 2,
+        "status_change_intervals": 1,
+        "unresolved_intervals": 0,
+        "unresolved_sample_count": 0
+      },
+      "warnings": []
+    },
+    {
+      "description": "Low interior mass with charged exterior gives a high mass-contrast junction.",
+      "image": "light_inner_mass_strong_contrast.png",
+      "name": "light_inner_mass_strong_contrast",
+      "outer_critical_impact_parameter": 4.720682331901133,
+      "outer_photon_sphere_radius": 2.6269427669584644,
+      "parameters": {
+        "m_minus": 0.15,
+        "m_plus": 1.0,
+        "observer_radius": 50.0,
+        "q_minus": 0.05,
+        "q_plus": 0.7,
+        "shell_radius": 3.25
+      },
+      "profile": "light_inner_mass_strong_contrast.json",
+      "sample_count": 126,
+      "sampling_diagnostics": {
+        "backend_disagreement_intervals": 0,
+        "path_class_change_intervals": 5,
+        "refine_rounds": 1,
+        "sample_count": 126,
+        "shell_crossing_change_intervals": 2,
+        "status_change_intervals": 1,
+        "unresolved_intervals": 0,
+        "unresolved_sample_count": 0
+      },
+      "warnings": [
+        "charge_mismatch_surface_source"
+      ]
+    },
+    {
+      "description": "Interior mass close to exterior mass with a small charge discontinuity.",
+      "image": "heavy_inner_mass_small_charge_jump.png",
+      "name": "heavy_inner_mass_small_charge_jump",
+      "outer_critical_impact_parameter": 5.01325345001919,
+      "outer_photon_sphere_radius": 2.8583077707206126,
+      "parameters": {
+        "m_minus": 0.9,
+        "m_plus": 1.0,
+        "observer_radius": 50.0,
+        "q_minus": 0.3,
+        "q_plus": 0.45,
+        "shell_radius": 4.2
+      },
+      "profile": "heavy_inner_mass_small_charge_jump.json",
+      "sample_count": 109,
+      "sampling_diagnostics": {
+        "backend_disagreement_intervals": 0,
+        "path_class_change_intervals": 5,
+        "refine_rounds": 1,
+        "sample_count": 109,
+        "shell_crossing_change_intervals": 2,
+        "status_change_intervals": 1,
+        "unresolved_intervals": 0,
+        "unresolved_sample_count": 0
+      },
+      "warnings": [
+        "charge_mismatch_surface_source"
+      ]
+    }
+  ],
+  "model": "rn_static_junction_sweep",
+  "notes": [
+    "All preset cases are subextremal RN/RN static junctions.",
+    "Shell radii are outside the outer metric unstable photon sphere and static on both sides.",
+    "charge_mismatch_surface_source means the junction shell carries surface charge; it is not a rejection."
+  ]
+}

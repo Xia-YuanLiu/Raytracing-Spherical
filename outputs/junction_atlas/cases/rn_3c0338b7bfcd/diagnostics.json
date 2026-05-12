@@ -1,0 +1,95 @@
+{
+  "backend_comparison_summary": {
+    "backend_disagreement_intervals": 0,
+    "enabled": false
+  },
+  "case_dir": "cases/rn_3c0338b7bfcd",
+  "case_id": "rn_3c0338b7bfcd",
+  "category_distances": {
+    "double": 0.15332981358324682,
+    "double_sphere_single_ring": 0.15332981358324682,
+    "high_charge": 0.7589532473963553,
+    "inner_only": 0.4392685296474803,
+    "large_lambda_jump": 17.408160293541343,
+    "large_q_jump": 0.6430474568284003,
+    "near_schwarzschild": 10.712142117396406,
+    "outer_only": 0.4451245943548176,
+    "rnds_observer_near_cosmological_patch": 17.475348750045214,
+    "shell_near_outer_photon_sphere": 0.33624567956301454,
+    "single_sphere_double_peak": 0.2119031828309306
+  },
+  "category_tags": [
+    "inner_only",
+    "shell_near_outer_photon_sphere",
+    "single_sphere_double_peak"
+  ],
+  "emissivity_modes": [
+    "paper",
+    "inverse_square"
+  ],
+  "family": "rn",
+  "figure_index": {
+    "fig_case_rn_3c0338b7bfcd_inner_only.png": {
+      "case_dir": "cases/rn_3c0338b7bfcd",
+      "case_id": "rn_3c0338b7bfcd",
+      "kind": "representative_case",
+      "path": "figures/fig_case_rn_3c0338b7bfcd_inner_only.png",
+      "tag": "inner_only"
+    },
+    "fig_case_rn_3c0338b7bfcd_shell_near_outer_photon_sphere.png": {
+      "case_dir": "cases/rn_3c0338b7bfcd",
+      "case_id": "rn_3c0338b7bfcd",
+      "kind": "representative_case",
+      "path": "figures/fig_case_rn_3c0338b7bfcd_shell_near_outer_photon_sphere.png",
+      "tag": "shell_near_outer_photon_sphere"
+    },
+    "fig_case_rn_3c0338b7bfcd_single_sphere_double_peak.png": {
+      "case_dir": "cases/rn_3c0338b7bfcd",
+      "case_id": "rn_3c0338b7bfcd",
+      "kind": "representative_case",
+      "path": "figures/fig_case_rn_3c0338b7bfcd_single_sphere_double_peak.png",
+      "tag": "single_sphere_double_peak"
+    }
+  },
+  "parameters": {
+    "family": "rn",
+    "lambda_minus": 0.0,
+    "lambda_plus": 0.0,
+    "m_minus": 0.7454545454545454,
+    "m_plus": 1.0,
+    "observer_radius": 50.0,
+    "q_minus": 0.2,
+    "q_plus": 0.2,
+    "shell_radius": 3.418181818181818
+  },
+  "primary_emissivity": "paper",
+  "profile_diagnostics": {
+    "peak_count": 3,
+    "peaks": [
+      {
+        "index": 50,
+        "prominence": 3.999580666030726e-05,
+        "x": 3.1999999999999997,
+        "y": 0.012335371091794372
+      },
+      {
+        "index": 392,
+        "prominence": 7.344956365340494e-07,
+        "x": 4.382521503366936,
+        "y": 0.04434562842647115
+      },
+      {
+        "index": 676,
+        "prominence": 5.473152543594359e-05,
+        "x": 5.207791959959639,
+        "y": 0.01154470955073724
+      }
+    ],
+    "redshift_cusp_orders": [],
+    "shell_crossing_count_max": 2,
+    "v_shape_orders": [
+      2
+    ]
+  },
+  "signal_score": 1.0
+}
