@@ -17,6 +17,7 @@ from .junctions import (
 )
 from .observers import FiniteStaticObserver
 from .policies import SolverOptions
+from .solvers import _classify_radial_event
 
 
 def _safe_g_metric(metric, u: float, b: float) -> float:
@@ -222,23 +223,27 @@ class StaticJunctionTransferSolver:
                 horizon_u = 1.0 / r_min * (1.0 - self.options.horizon_buffer)
                 if shell_u <= horizon_u:
                     return shell_u, EventType.SHELL_CROSSING
-                return horizon_u, EventType.HORIZON
+                event = _classify_radial_event(metric, r_min, default=EventType.INNER_BOUNDARY)
+                return horizon_u, event
             return shell_u, EventType.SHELL_CROSSING
         if region == "inner" and direction == "outward":
             if math.isfinite(r_max):
                 outer_boundary_u = 1.0 / r_max * (1.0 + self.options.horizon_buffer)
                 if shell_u >= outer_boundary_u:
                     return shell_u, EventType.SHELL_CROSSING
-                return outer_boundary_u, EventType.OUTER_BOUNDARY
+                event = _classify_radial_event(metric, r_max, default=EventType.OUTER_BOUNDARY)
+                return outer_boundary_u, event
             return shell_u, EventType.SHELL_CROSSING
         if direction == "inward":
             if self.options.inner_boundary_radius is not None:
                 return 1.0 / self.options.inner_boundary_radius, EventType.INNER_BOUNDARY
             if r_min > 0.0:
-                return 1.0 / r_min * (1.0 - self.options.horizon_buffer), EventType.HORIZON
+                event = _classify_radial_event(metric, r_min, default=EventType.INNER_BOUNDARY)
+                return 1.0 / r_min * (1.0 - self.options.horizon_buffer), event
             return max(shell_u * 2.0, 1.0), EventType.INNER_BOUNDARY
         if math.isfinite(r_max):
-            return 1.0 / r_max * (1.0 + self.options.horizon_buffer), EventType.OUTER_BOUNDARY
+            event = _classify_radial_event(metric, r_max, default=EventType.OUTER_BOUNDARY)
+            return 1.0 / r_max * (1.0 + self.options.horizon_buffer), event
         return 0.0, EventType.ESCAPE
 
     def trace_b(
@@ -473,7 +478,7 @@ class StaticJunctionHamiltonianSolver:
             if r_min <= 0.0:
                 return None
             r_stop = r_min * (1.0 + self.options.horizon_buffer)
-            event_type = EventType.HORIZON
+            event_type = _classify_radial_event(metric, r_min, default=EventType.INNER_BOUNDARY)
 
         def event_inner_boundary(lambda_value: float, y: np.ndarray) -> float:
             return float(y[0]) - r_stop
@@ -482,18 +487,19 @@ class StaticJunctionHamiltonianSolver:
         event_inner_boundary.direction = -1.0
         return event_inner_boundary, event_type
 
-    def _event_outer_boundary(self, metric, radial_direction: str):
+    def _event_outer_boundary(self, metric, radial_direction: str) -> tuple[object, EventType] | None:
         _, r_max = metric.valid_radial_domain()
         if radial_direction != "outward" or not math.isfinite(r_max):
             return None
         r_stop = r_max * (1.0 - self.options.horizon_buffer)
+        event_type = _classify_radial_event(metric, r_max, default=EventType.OUTER_BOUNDARY)
 
         def event_outer_boundary(lambda_value: float, y: np.ndarray) -> float:
             return float(y[0]) - r_stop
 
         event_outer_boundary.terminal = True
         event_outer_boundary.direction = 1.0
-        return event_outer_boundary
+        return event_outer_boundary, event_type
 
     def _event_escape(self, metric, radial_direction: str):
         _, r_max = metric.valid_radial_domain()
@@ -526,8 +532,9 @@ class StaticJunctionHamiltonianSolver:
             event_types.append(event_type)
         outer = self._event_outer_boundary(metric, radial_direction)
         if outer is not None:
-            events.append(outer)
-            event_types.append(EventType.OUTER_BOUNDARY)
+            event, event_type = outer
+            events.append(event)
+            event_types.append(event_type)
         escape = self._event_escape(metric, radial_direction)
         if escape is not None:
             events.append(escape)
