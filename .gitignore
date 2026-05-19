@@ -4,6 +4,9 @@ __pycache__/
 .claude/
 .codex
 .codex/
+.superpowers/
 AGENTS.md
+CONTEXT.md
+_prototype_check/
 docs/
 LQGBHShadow/
