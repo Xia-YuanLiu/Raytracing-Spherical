@@ -13,6 +13,37 @@ from .observers import FiniteStaticObserver, InfinityObserver
 from .policies import OutsideTracePolicy, SolverOptions, ThroughTracePolicy, TracePolicy
 
 
+def _guard_tabulated_metric_combinations(
+    metric: StaticSphericalMetric,
+    observer: InfinityObserver | FiniteStaticObserver,
+    trace_policy: TracePolicy,
+) -> None:
+    """Reject ``TabulatedMetric`` + ``InfinityObserver`` / ``ThroughTracePolicy``.
+
+    Plan decisions 10 and 11 forbid these combinations in the first phase
+    because ``TabulatedMetric.G(u=0)`` is undefined and the numerical payload
+    only carries an exterior static patch (no internal-region support).
+
+    ``TabulatedMetric`` is imported lazily so callers that never touch the
+    numerical pipeline do not pay for ``scipy.interpolate`` at solver
+    module-load time.
+    """
+    from .numerical_metrics import TabulatedMetric
+
+    if not isinstance(metric, TabulatedMetric):
+        return
+    if isinstance(observer, InfinityObserver):
+        raise NotImplementedError(
+            "TabulatedMetric requires FiniteStaticObserver; InfinityObserver is "
+            "not supported (plan decision 11: u=0 has no tabulated support)"
+        )
+    if isinstance(trace_policy, ThroughTracePolicy):
+        raise NotImplementedError(
+            "TabulatedMetric + ThroughTracePolicy is not supported in the first "
+            "phase (plan decision 10: no internal-region payload)"
+        )
+
+
 _BOUNDARY_HORIZON_REL_TOL = 1e-6
 _BOUNDARY_HORIZON_ABS_TOL = 1e-8
 
@@ -96,6 +127,7 @@ class QuadTransferSolver:
     def trace_b(self, b: float) -> RayResult:
         if b <= 0.0:
             raise ValueError("b must be positive")
+        _guard_tabulated_metric_combinations(self.metric, self.observer, self.trace_policy)
         if isinstance(self.observer, FiniteStaticObserver):
             r_obs = self.observer.r_obs
             a_obs = self.metric.A(r_obs)
@@ -625,6 +657,7 @@ class OdeTrajectorySolver:
     def trace_b(self, b: float) -> RayResult:
         if not isinstance(self.trace_policy, OutsideTracePolicy):
             raise ValueError("OdeTrajectorySolver only supports OutsideTracePolicy in exterior static coordinates")
+        _guard_tabulated_metric_combinations(self.metric, self.observer, self.trace_policy)
 
         quad_result = QuadTransferSolver(self.metric, self.observer, self.trace_policy, self.options).trace_b(b)
         if quad_result.diagnostics.near_critical or not quad_result.segments:
@@ -778,6 +811,7 @@ class HamiltonianTrajectorySolver:
             raise ValueError("HamiltonianTrajectorySolver only supports OutsideTracePolicy in exterior static coordinates")
         if b <= 0.0:
             raise ValueError("b must be positive")
+        _guard_tabulated_metric_combinations(self.metric, self.observer, self.trace_policy)
 
         critical_curve = _near_critical(self.metric, b, self.options.critical_exclusion)
         e = self.energy

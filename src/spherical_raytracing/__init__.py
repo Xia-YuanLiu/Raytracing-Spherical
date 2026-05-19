@@ -16,6 +16,14 @@ from .junctions import (
 )
 from .junction_tracing import StaticJunctionHamiltonianSolver, StaticJunctionTransferSolver, trace_with_backend_compare
 from .metrics import LQGMetric, ReissnerNordstromDeSitterMetric, ReissnerNordstromMetric, SchwarzschildMetric
+from .numerical_loader import ValidationGate, load_metric_npz
+from .numerical_metrics import (
+    CanonicalPayload,
+    LiDMBHMetadata,
+    StaticDomainSelector,
+    TabulatedMetric,
+    ValidationOptions,
+)
 from .observers import FiniteStaticObserver, InfinityObserver
 from .policies import OutsideTracePolicy, SolverOptions, ThroughTracePolicy
 from .solvers import HamiltonianTrajectorySolver, OdeTrajectorySolver, QuadTransferSolver
@@ -23,6 +31,7 @@ from .sources import ObservedIntensity, ThinDiskSource, observed_intensity
 from .transfer import DiskWindow, IntersectionRecord, compute_intersections
 
 __all__ = [
+    "CanonicalPayload",
     "CriticalCurve",
     "DiskWindow",
     "EventType",
@@ -34,6 +43,7 @@ __all__ = [
     "JunctionPhysicsDiagnostics",
     "JunctionRayResult",
     "LQGMetric",
+    "LiDMBHMetadata",
     "SegmentConstants",
     "ShellCrossingRecord",
     "ObservedIntensity",
@@ -47,6 +57,7 @@ __all__ = [
     "RaySegment",
     "RenderedImage",
     "SamplingOptions",
+    "StaticDomainSelector",
     "StaticJunctionHamiltonianSolver",
     "StaticJunctionTransferSolver",
     "StaticJunctionSpacetime",
@@ -55,10 +66,14 @@ __all__ = [
     "ReissnerNordstromMetric",
     "SchwarzschildMetric",
     "SolverOptions",
+    "TabulatedMetric",
     "ThinDiskSource",
+    "ValidationGate",
+    "ValidationOptions",
     "annotate_junction_intersections",
     "compare_junction_results",
     "junction_redshift_factor",
+    "load_metric_npz",
     "match_static_shell",
     "trace_with_backend_compare",
     "ThroughTracePolicy",

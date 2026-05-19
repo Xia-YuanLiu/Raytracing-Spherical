@@ -6,23 +6,30 @@ def test_package_imports():
 
 def test_public_api_exports_core_types():
     from spherical_raytracing import (
+        CanonicalPayload,
         DiskWindow,
         FiniteStaticObserver,
         HamiltonianTrajectorySolver,
         InfinityObserver,
         JunctionRayResult,
         LQGMetric,
+        LiDMBHMetadata,
         OdeTrajectorySolver,
         QuadTransferSolver,
         ReissnerNordstromDeSitterMetric,
         ReissnerNordstromMetric,
         SchwarzschildMetric,
+        StaticDomainSelector,
         StaticJunctionHamiltonianSolver,
         StaticJunctionTransferSolver,
         StaticJunctionSpacetime,
         StaticShell,
+        TabulatedMetric,
         ThinDiskSource,
+        ValidationGate,
+        ValidationOptions,
         compare_junction_results,
+        load_metric_npz,
         trace_with_backend_compare,
     )
 
@@ -44,3 +51,10 @@ def test_public_api_exports_core_types():
     assert DiskWindow
     assert compare_junction_results
     assert trace_with_backend_compare
+    assert TabulatedMetric
+    assert load_metric_npz
+    assert CanonicalPayload
+    assert LiDMBHMetadata
+    assert ValidationOptions
+    assert StaticDomainSelector
+    assert ValidationGate
