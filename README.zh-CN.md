@@ -65,6 +65,70 @@ print(ray.diagnostics.termination_reason)
 print(intensity.total)
 ```
 
+## 快速开始：数值度规（`.npz` 表格）
+
+对于以 `.npz` 文件形式提供的表格度规（Li-DM-BH 的 `r/f/g/B/params` 布局，或标准的
+`r/A/B` 表格），请使用 `load_metric_npz` 配合 `TabulatedMetric` 与有限半径静态观测者：
+
+```python
+from spherical_raytracing import (
+    DiskWindow,
+    FiniteStaticObserver,
+    QuadTransferSolver,
+    StaticDomainSelector,
+    TabulatedMetric,
+    ThinDiskSource,
+    compute_intersections,
+    load_metric_npz,
+    observed_intensity,
+)
+
+payload = load_metric_npz("hernquist_L0.npz")
+r_lo, r_hi = StaticDomainSelector().choose(payload)
+metric = TabulatedMetric(payload=payload, static_domain=(r_lo, r_hi))
+
+r_ph = metric.photon_spheres()[-1]
+r_obs = 5.0 * r_ph
+observer = FiniteStaticObserver(r_obs=r_obs, metric=metric)
+solver = QuadTransferSolver(metric=metric, observer=observer)
+
+b_crit = metric.critical_curves()[0].b_crit
+ray = solver.trace_b(b_crit * 1.05)
+
+disk = DiskWindow(r_min=r_ph * 1.05, r_max=r_obs - 0.5)
+intersections = compute_intersections(ray, disk, max_order=4)
+source = ThinDiskSource(lambda r, region=None: 1.0 / r**2)
+intensity = observed_intensity(intersections, source, metric, observer)
+```
+
+关键约束（完整设计见 `docs/plans/数值度规接入计划.md`）：
+
+- Li-DM-BH 表格中 `A=f`、`C=g`；包内部用
+  `scipy.interpolate.PchipInterpolator` 在静态域子数组上同时插值 `A(r)`
+  和 `C(r)=1/B(r)`（决策 1/4）。
+- `(r_boundary, 0.0)` 锚点**仅在静态域端点与 metadata horizon 在
+  决策 6 容差内匹配时**才注入。非 horizon 端点——例如标准 `r/A/B` 表格的
+  支持上下界，或 `StaticDomainSelector(radial_bounds=...)` 在静态域内部
+  截取的子区间——**不会**被零锚点，避免在普通支持边界处人为造出假视界
+  扭曲附近的数值。
+- 也接受标准 `r/A/B` 布局；此时 `payload.metadata.raw_B is None`，
+  `B*C≈1` 软检查自动跳过（决策 7）。这类 payload 没有 metadata roots，
+  所以 `TabulatedMetric.horizons()` / `photon_spheres()` /
+  `critical_curves()` 会从插值后的表格数值推断 `A=0` 与
+  `r*A'-2*A = 0` 的根，保证 `b_crit` 与 near-critical 保护仍可用。
+- 默认选择最后一个静态域；可通过
+  `StaticDomainSelector(domain_index=..., radial_bounds=...)` 覆盖（决策 5）。
+- `TabulatedMetric` 仅支持 `FiniteStaticObserver` + `OutsideTracePolicy` 组合；
+  与 `InfinityObserver` 或 `ThroughTracePolicy` 组合在 solver 入口
+  直接 raise `NotImplementedError`（决策 10/11），同时
+  `r_obs` 必须落在表格的 grid 覆盖范围内。
+- 域外查询、越过 `[r_grid_min, r_grid_max]` 的查询，以及
+  `|C| < c_tol` 的查询都硬 raise `ValueError`，
+  不会让 NaN/inf 静默传到 solver（决策 8）。
+- `TabulatedMetric` 的 per-ray 性能预期比解析度规慢 10–100×（PCHIP 评估开销）。
+  Hamiltonian 后端对数值度规的稳定性首期不保证——请使用
+  `QuadTransferSolver`（或 `OdeTrajectorySolver`）。
+
 ## 快速开始：静态 Junction
 
 ```python
@@ -105,6 +169,9 @@ src/spherical_raytracing/
   junction_tracing.py     # 静态 junction transfer 和 Hamiltonian 求解器
   junctions.py            # 壳层匹配、壳层穿越和 junction 诊断
   metrics.py              # 静态球对称度规
+  numerical_loader.py     # 数值度规 .npz 加载器与校验门禁
+  numerical_metrics.py    # CanonicalPayload、LiDMBHMetadata、ValidationOptions、
+                          # StaticDomainSelector、TabulatedMetric
   observers.py            # 无穷远和有限半径静态观测者
   policies.py             # 追踪策略和求解器选项
   solvers.py              # 单一度规的求积、ODE 和 Hamiltonian 求解器
