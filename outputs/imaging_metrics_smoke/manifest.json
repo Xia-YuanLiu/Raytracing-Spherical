@@ -1,0 +1,817 @@
+{
+  "cases": [
+    {
+      "name": "baseline_L0_M0_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/baseline_L0_M0_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/baseline_L0_M0_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/baseline_L0_M0_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/baseline_L0_M0_a6_image.png",
+      "r_grid": [
+        1.25,
+        120.0
+      ],
+      "static_domain": [
+        2.0,
+        null
+      ],
+      "r_obs": 15.0,
+      "disk_window": [
+        3.1500000000000004,
+        14.5
+      ],
+      "r_ph": 3.0,
+      "b_crit": 5.195746457439971,
+      "rho_crit": 5.110388579019485,
+      "image_radius": 9.198699442235073,
+      "sample_count": 145,
+      "intensity_max": 0.041583433585834315,
+      "load_warnings": [
+        "table r_max=120 is finite; pair TabulatedMetric with FiniteStaticObserver (InfinityObserver is hard-blocked)"
+      ]
+    },
+    {
+      "name": "baseline_Lneq_M0_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/baseline_Lneq_M0_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/baseline_Lneq_M0_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/baseline_Lneq_M0_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/baseline_Lneq_M0_a6_image.png",
+      "r_grid": [
+        1.26344554230021,
+        17.028222574027808
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        16.217354832407434
+      ],
+      "r_obs": 9.608677416203717,
+      "disk_window": [
+        3.1500000000000004,
+        9.108677416203717
+      ],
+      "r_ph": 3.0,
+      "b_crit": 5.4470477940192215,
+      "rho_crit": 4.124268013166403,
+      "image_radius": 7.423682423699526,
+      "sample_count": 145,
+      "intensity_max": 0.10689151858968504,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [1.2425128925741546e-08, 2.048999299120169e-07]"
+      ]
+    },
+    {
+      "name": "burkert_L0_M0p5_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/burkert_L0_M0p5_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/burkert_L0_M0p5_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/burkert_L0_M0p5_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/burkert_L0_M0p5_a6_image.png",
+      "r_grid": [
+        1.25,
+        120.0
+      ],
+      "static_domain": [
+        2.0,
+        null
+      ],
+      "r_obs": 15.064577118659074,
+      "disk_window": [
+        3.1635611949184055,
+        14.564577118659074
+      ],
+      "r_ph": 3.0129154237318145,
+      "b_crit": 6.782825324318601,
+      "rho_crit": 5.707087942052425,
+      "image_radius": 10.272758295694365,
+      "sample_count": 145,
+      "intensity_max": 0.028921469150215724,
+      "load_warnings": [
+        "table r_max=120 is finite; pair TabulatedMetric with FiniteStaticObserver (InfinityObserver is hard-blocked)"
+      ]
+    },
+    {
+      "name": "burkert_L0_M1_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/burkert_L0_M1_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/burkert_L0_M1_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/burkert_L0_M1_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/burkert_L0_M1_a6_image.png",
+      "r_grid": [
+        1.25,
+        120.0
+      ],
+      "static_domain": [
+        2.0,
+        null
+      ],
+      "r_obs": 15.136311567584146,
+      "disk_window": [
+        3.178625429192671,
+        14.636311567584146
+      ],
+      "r_ph": 3.0272623135168293,
+      "b_crit": 9.40930813639063,
+      "rho_crit": 6.576607977765841,
+      "image_radius": 11.837894359978513,
+      "sample_count": 145,
+      "intensity_max": 0.018451011910569956,
+      "load_warnings": [
+        "table r_max=120 is finite; pair TabulatedMetric with FiniteStaticObserver (InfinityObserver is hard-blocked)"
+      ]
+    },
+    {
+      "name": "burkert_Lneq_M0p5_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/burkert_Lneq_M0p5_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/burkert_Lneq_M0p5_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/burkert_Lneq_M0p5_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/burkert_Lneq_M0p5_a6_image.png",
+      "r_grid": [
+        1.26344554230021,
+        16.846852354496857
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        16.044621289997007
+      ],
+      "r_obs": 9.526374435456663,
+      "disk_window": [
+        3.1585339599621345,
+        9.026374435456663
+      ],
+      "r_ph": 3.0081275809163186,
+      "b_crit": 5.762838690986502,
+      "rho_crit": 4.27749452106873,
+      "image_radius": 7.699490137923715,
+      "sample_count": 145,
+      "intensity_max": 0.09657575752072967,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [6.286420806134174e-08, 1.3390503994514802e-07]"
+      ]
+    },
+    {
+      "name": "burkert_Lneq_M1_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/burkert_Lneq_M1_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/burkert_Lneq_M1_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/burkert_Lneq_M1_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/burkert_Lneq_M1_a6_image.png",
+      "r_grid": [
+        1.26344554230021,
+        16.658860237186495
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        15.865581178272851
+      ],
+      "r_obs": 9.441201419786719,
+      "disk_window": [
+        3.167662744365614,
+        8.941201419786719
+      ],
+      "r_ph": 3.0168216613005847,
+      "b_crit": 6.122655262936698,
+      "rho_crit": 4.451210738960341,
+      "image_radius": 8.012179330128614,
+      "sample_count": 145,
+      "intensity_max": 0.08664128464664947,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [3.687527261320156e-08, 5.479431663957257e-08]"
+      ]
+    },
+    {
+      "name": "burkert_Lneq_M7_a6_multi",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/burkert_Lneq_M7_a6_multi.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/burkert_Lneq_M7_a6_multi_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/burkert_Lneq_M7_a6_multi_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/burkert_Lneq_M7_a6_multi_image.png",
+      "r_grid": [
+        1.26344554230021,
+        13.331084832273396
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        12.696271268831804
+      ],
+      "r_obs": 10.529610903087995,
+      "disk_window": [
+        8.781098064211394,
+        10.029610903087995
+      ],
+      "r_ph": 8.362950537344185,
+      "b_crit": 34.618493532573424,
+      "rho_crit": 20.06410857644034,
+      "image_radius": 36.11539543759261,
+      "sample_count": 145,
+      "intensity_max": 0.0284682308479652,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [1.1175857972389736e-07, 4.892989675653325e-07]"
+      ]
+    },
+    {
+      "name": "hernquist_L0_M0p5_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/hernquist_L0_M0p5_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/hernquist_L0_M0p5_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/hernquist_L0_M0p5_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/hernquist_L0_M0p5_a6_image.png",
+      "r_grid": [
+        2.002,
+        120.0
+      ],
+      "static_domain": [
+        2.0,
+        null
+      ],
+      "r_obs": 15.095765391483397,
+      "disk_window": [
+        3.170110732211514,
+        14.595765391483397
+      ],
+      "r_ph": 3.0191530782966796,
+      "b_crit": 5.499763769376944,
+      "rho_crit": 5.299554040784669,
+      "image_radius": 9.539197273412404,
+      "sample_count": 145,
+      "intensity_max": 0.03722836756085407,
+      "load_warnings": [
+        "table r_max=120 is finite; pair TabulatedMetric with FiniteStaticObserver (InfinityObserver is hard-blocked)"
+      ]
+    },
+    {
+      "name": "hernquist_L0_M1_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/hernquist_L0_M1_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/hernquist_L0_M1_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/hernquist_L0_M1_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/hernquist_L0_M1_a6_image.png",
+      "r_grid": [
+        2.002,
+        120.0
+      ],
+      "static_domain": [
+        2.0,
+        null
+      ],
+      "r_obs": 15.198420997897461,
+      "disk_window": [
+        3.191668409558467,
+        14.698420997897461
+      ],
+      "r_ph": 3.0396841995794923,
+      "b_crit": 5.83622729155492,
+      "rho_crit": 5.508755898806919,
+      "image_radius": 9.915760617852456,
+      "sample_count": 145,
+      "intensity_max": 0.033227854713022684,
+      "load_warnings": [
+        "table r_max=120 is finite; pair TabulatedMetric with FiniteStaticObserver (InfinityObserver is hard-blocked)"
+      ]
+    },
+    {
+      "name": "hernquist_Lneq_A2p7_a6_paper_weak",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/hernquist_Lneq_A2p7_a6_paper_weak.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/hernquist_Lneq_A2p7_a6_paper_weak_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/hernquist_Lneq_A2p7_a6_paper_weak_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/hernquist_Lneq_A2p7_a6_paper_weak_image.png",
+      "r_grid": [
+        1.26344554230021,
+        17.013460493501988
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        16.20329570809713
+      ],
+      "r_obs": 9.602119598878161,
+      "disk_window": [
+        3.150990664142152,
+        9.102119598878161
+      ],
+      "r_ph": 3.000943489659192,
+      "b_crit": 5.473580776303893,
+      "rho_crit": 4.1379081116068654,
+      "image_radius": 7.448234600892358,
+      "sample_count": 145,
+      "intensity_max": 0.10591280072686868,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [6.286420806134174e-08, 1.993060969596172e-07]"
+      ]
+    },
+    {
+      "name": "hernquist_Lneq_A380_a6_multi",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/hernquist_Lneq_A380_a6_multi.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/hernquist_Lneq_A380_a6_multi_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/hernquist_Lneq_A380_a6_multi_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/hernquist_Lneq_A380_a6_multi_image.png",
+      "r_grid": [
+        1.26344554230021,
+        14.272995184575745
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        13.593328747214995
+      ],
+      "r_obs": 9.809439703009126,
+      "disk_window": [
+        6.326828191743418,
+        9.309439703009126
+      ],
+      "r_ph": 6.0255506588032555,
+      "b_crit": 20.355670890660072,
+      "rho_crit": 12.885953774287163,
+      "image_radius": 23.194716793716893,
+      "sample_count": 145,
+      "intensity_max": 0.02760283488143947,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [1.1175857972389736e-07, 2.968267871494845e-07]"
+      ]
+    },
+    {
+      "name": "hernquist_Lneq_M0p5_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/hernquist_Lneq_M0p5_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/hernquist_Lneq_M0p5_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/hernquist_Lneq_M0p5_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/hernquist_Lneq_M0p5_a6_image.png",
+      "r_grid": [
+        1.26344554230021,
+        16.981460516697652
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        16.172819539712048
+      ],
+      "r_obs": 9.587911600153173,
+      "disk_window": [
+        3.153153843624012,
+        9.087911600153173
+      ],
+      "r_ph": 3.003003660594297,
+      "b_crit": 5.5318314356016165,
+      "rho_crit": 4.167850984901525,
+      "image_radius": 7.502131772822746,
+      "sample_count": 145,
+      "intensity_max": 0.10380245423224135,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [6.286420806134174e-08, 1.8707029170172973e-07]"
+      ]
+    },
+    {
+      "name": "hernquist_Lneq_M1_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/hernquist_Lneq_M1_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/hernquist_Lneq_M1_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/hernquist_Lneq_M1_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/hernquist_Lneq_M1_a6_image.png",
+      "r_grid": [
+        1.26344554230021,
+        16.934277750765617
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        16.127883572157728
+      ],
+      "r_obs": 9.566981454237625,
+      "disk_window": [
+        3.1563833031334,
+        9.066981454237625
+      ],
+      "r_ph": 3.0060793363175238,
+      "b_crit": 5.619597438246299,
+      "rho_crit": 4.212962231850773,
+      "image_radius": 7.583332017331392,
+      "sample_count": 145,
+      "intensity_max": 0.10076454434864883,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [6.286420806134174e-08, 1.6875067743171712e-07]"
+      ]
+    },
+    {
+      "name": "jaffe_L0_M0p5_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/jaffe_L0_M0p5_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/jaffe_L0_M0p5_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/jaffe_L0_M0p5_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/jaffe_L0_M0p5_a6_image.png",
+      "r_grid": [
+        1.25,
+        120.0
+      ],
+      "static_domain": [
+        2.0,
+        null
+      ],
+      "r_obs": 15.026015418461412,
+      "disk_window": [
+        3.1554632378768965,
+        14.526015418461412
+      ],
+      "r_ph": 3.0052030836922823,
+      "b_crit": 5.363511987363412,
+      "rho_crit": 5.219140298887865,
+      "image_radius": 9.394452537998157,
+      "sample_count": 145,
+      "intensity_max": 0.038899747553561154,
+      "load_warnings": [
+        "table r_max=120 is finite; pair TabulatedMetric with FiniteStaticObserver (InfinityObserver is hard-blocked)"
+      ]
+    },
+    {
+      "name": "jaffe_L0_M1_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/jaffe_L0_M1_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/jaffe_L0_M1_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/jaffe_L0_M1_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/jaffe_L0_M1_a6_image.png",
+      "r_grid": [
+        1.25,
+        120.0
+      ],
+      "static_domain": [
+        2.0,
+        null
+      ],
+      "r_obs": 15.053043241164046,
+      "disk_window": [
+        3.1611390806444497,
+        14.553043241164046
+      ],
+      "r_ph": 3.010608648232809,
+      "b_crit": 5.5419759538281435,
+      "rho_crit": 5.33461461530664,
+      "image_radius": 9.602306307551952,
+      "sample_count": 145,
+      "intensity_max": 0.03635197712232016,
+      "load_warnings": [
+        "table r_max=120 is finite; pair TabulatedMetric with FiniteStaticObserver (InfinityObserver is hard-blocked)"
+      ]
+    },
+    {
+      "name": "jaffe_Lneq_M0p5_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/jaffe_Lneq_M0p5_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/jaffe_Lneq_M0p5_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/jaffe_Lneq_M0p5_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/jaffe_Lneq_M0p5_a6_image.png",
+      "r_grid": [
+        1.26344554230021,
+        16.9924027621279
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        16.183240725836093
+      ],
+      "r_obs": 9.593269433994493,
+      "disk_window": [
+        3.153463049260537,
+        9.093269433994493
+      ],
+      "r_ph": 3.003298142152892,
+      "b_crit": 5.517154968553547,
+      "rho_crit": 4.1622057335430345,
+      "image_radius": 7.491970320377463,
+      "sample_count": 145,
+      "intensity_max": 0.10426119495542552,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [6.286420806134174e-08, 1.9127126904550096e-07]"
+      ]
+    },
+    {
+      "name": "jaffe_Lneq_M1_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/jaffe_Lneq_M1_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/jaffe_Lneq_M1_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/jaffe_Lneq_M1_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/jaffe_Lneq_M1_a6_image.png",
+      "r_grid": [
+        1.26344554230021,
+        16.956336974425067
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        16.1488923565953
+      ],
+      "r_obs": 9.577786091074039,
+      "disk_window": [
+        3.1570138168304136,
+        9.077786091074039
+      ],
+      "r_ph": 3.0066798255527747,
+      "b_crit": 5.5892799684186025,
+      "rho_crit": 4.201272634707861,
+      "image_radius": 7.56229074247415,
+      "sample_count": 145,
+      "intensity_max": 0.10165243423716458,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [6.286420806134174e-08, 1.7735730395429528e-07]"
+      ]
+    },
+    {
+      "name": "jaffe_Lneq_M29p5_a10_multi",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/jaffe_Lneq_M29p5_a10_multi.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/jaffe_Lneq_M29p5_a10_multi_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/jaffe_Lneq_M29p5_a10_multi_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/jaffe_Lneq_M29p5_a10_multi_image.png",
+      "r_grid": [
+        1.26344554230021,
+        14.587347220819126
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        13.892711638875358
+      ],
+      "r_obs": 9.51555799027191,
+      "disk_window": [
+        5.395324558751886,
+        9.01555799027191
+      ],
+      "r_ph": 5.138404341668463,
+      "b_crit": 17.793027874405553,
+      "rho_crit": 12.170029683199006,
+      "image_radius": 21.906053429758213,
+      "sample_count": 145,
+      "intensity_max": 0.028783274134924177,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [1.1175857972389736e-07, 5.084841028235587e-07]",
+        "metadata photon_spheres disagree with tabulated rA'-2A=0 zeros: [(3.9571876058918942, 2.358184304274147e-06), (4.087216737073937, 2.014508859282671e-06)]"
+      ]
+    },
+    {
+      "name": "nfw_L0_M0p5_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/nfw_L0_M0p5_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/nfw_L0_M0p5_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/nfw_L0_M0p5_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/nfw_L0_M0p5_a6_image.png",
+      "r_grid": [
+        1.25,
+        120.0
+      ],
+      "static_domain": [
+        2.0,
+        null
+      ],
+      "r_obs": 15.065411943091213,
+      "disk_window": [
+        3.163736508049155,
+        14.565411943091213
+      ],
+      "r_ph": 3.0130823886182427,
+      "b_crit": 6.955599701188867,
+      "rho_crit": 5.659101203125059,
+      "image_radius": 10.186382165625107,
+      "sample_count": 145,
+      "intensity_max": 0.029773035821350755,
+      "load_warnings": [
+        "table r_max=120 is finite; pair TabulatedMetric with FiniteStaticObserver (InfinityObserver is hard-blocked)"
+      ]
+    },
+    {
+      "name": "nfw_L0_M1_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/nfw_L0_M1_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/nfw_L0_M1_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/nfw_L0_M1_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/nfw_L0_M1_a6_image.png",
+      "r_grid": [
+        1.25,
+        120.0
+      ],
+      "static_domain": [
+        2.0,
+        null
+      ],
+      "r_obs": 15.138037713202204,
+      "disk_window": [
+        3.178987919772463,
+        14.638037713202204
+      ],
+      "r_ph": 3.0276075426404407,
+      "b_crit": 9.95648162482324,
+      "rho_crit": 6.433519226363123,
+      "image_radius": 11.580334607453622,
+      "sample_count": 145,
+      "intensity_max": 0.019815369765649817,
+      "load_warnings": [
+        "table r_max=120 is finite; pair TabulatedMetric with FiniteStaticObserver (InfinityObserver is hard-blocked)"
+      ]
+    },
+    {
+      "name": "nfw_Lneq_M0p5_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/nfw_Lneq_M0p5_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/nfw_Lneq_M0p5_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/nfw_Lneq_M0p5_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/nfw_Lneq_M0p5_a6_image.png",
+      "r_grid": [
+        1.26344554230021,
+        16.86215839086044
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        16.059198467486134
+      ],
+      "r_obs": 9.533712683690577,
+      "disk_window": [
+        3.1586382448897705,
+        9.033712683690577
+      ],
+      "r_ph": 3.0082268998950195,
+      "b_crit": 5.7383899460797485,
+      "rho_crit": 4.2669010277124855,
+      "image_radius": 7.680421849882474,
+      "sample_count": 145,
+      "intensity_max": 0.09729543904024351,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [6.286420806134174e-08, 1.4009179949425743e-07]"
+      ]
+    },
+    {
+      "name": "nfw_Lneq_M1_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/nfw_Lneq_M1_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/nfw_Lneq_M1_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/nfw_Lneq_M1_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/nfw_Lneq_M1_a6_image.png",
+      "r_grid": [
+        1.26344554230021,
+        16.690572057470046
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        15.895782911876234
+      ],
+      "r_obs": 9.456403844846319,
+      "disk_window": [
+        3.167876016707225,
+        8.956403844846319
+      ],
+      "r_ph": 3.0170247778164048,
+      "b_crit": 6.066801488572154,
+      "rho_crit": 4.427017215384766,
+      "image_radius": 7.968630987692579,
+      "sample_count": 145,
+      "intensity_max": 0.08806900264838538,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [6.286420806134174e-08, 6.855589873566714e-08]"
+      ]
+    },
+    {
+      "name": "nfw_Lneq_M7p5_a6_multi",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/nfw_Lneq_M7p5_a6_multi.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/nfw_Lneq_M7p5_a6_multi_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/nfw_Lneq_M7p5_a6_multi_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/nfw_Lneq_M7p5_a6_multi_image.png",
+      "r_grid": [
+        1.26344554230021,
+        13.445189833038567
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        12.804942698131969
+      ],
+      "r_obs": 10.464550723774604,
+      "disk_window": [
+        8.530366686888101,
+        9.964550723774604
+      ],
+      "r_ph": 8.124158749417239,
+      "b_crit": 32.07046485053635,
+      "rho_crit": 18.24697532493943,
+      "image_radius": 32.844555584890976,
+      "sample_count": 145,
+      "intensity_max": 0.027684169800354604,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [8.460519840269853e-08, 6.446567724083252e-07]"
+      ]
+    },
+    {
+      "name": "taylor_silk_L0_M0p5_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/taylor_silk_L0_M0p5_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/taylor_silk_L0_M0p5_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/taylor_silk_L0_M0p5_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/taylor_silk_L0_M0p5_a6_image.png",
+      "r_grid": [
+        1.25,
+        120.0
+      ],
+      "static_domain": [
+        2.0,
+        null
+      ],
+      "r_obs": 15.065082063910317,
+      "disk_window": [
+        3.163667233421167,
+        14.565082063910317
+      ],
+      "r_ph": 3.0130164127820636,
+      "b_crit": 6.308674008374876,
+      "rho_crit": 5.564443817597856,
+      "image_radius": 10.01599887167614,
+      "sample_count": 145,
+      "intensity_max": 0.03156080192296216,
+      "load_warnings": [
+        "table r_max=120 is finite; pair TabulatedMetric with FiniteStaticObserver (InfinityObserver is hard-blocked)"
+      ]
+    },
+    {
+      "name": "taylor_silk_L0_M1_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/taylor_silk_L0_M1_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/taylor_silk_L0_M1_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/taylor_silk_L0_M1_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/taylor_silk_L0_M1_a6_image.png",
+      "r_grid": [
+        1.25,
+        120.0
+      ],
+      "static_domain": [
+        2.0,
+        null
+      ],
+      "r_obs": 15.137189809729962,
+      "disk_window": [
+        3.1788098600432924,
+        14.637189809729962
+      ],
+      "r_ph": 3.0274379619459926,
+      "b_crit": 7.891887797645048,
+      "rho_crit": 6.161161009606188,
+      "image_radius": 11.090089817291139,
+      "sample_count": 145,
+      "intensity_max": 0.02289690576905163,
+      "load_warnings": [
+        "table r_max=120 is finite; pair TabulatedMetric with FiniteStaticObserver (InfinityObserver is hard-blocked)"
+      ]
+    },
+    {
+      "name": "taylor_silk_Lneq_M0p5_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/taylor_silk_Lneq_M0p5_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/taylor_silk_Lneq_M0p5_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/taylor_silk_Lneq_M0p5_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/taylor_silk_Lneq_M0p5_a6_image.png",
+      "r_grid": [
+        1.26344554230021,
+        16.88701442729836
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        16.082870883141297
+      ],
+      "r_obs": 9.545526911962543,
+      "disk_window": [
+        3.1585920878229787,
+        9.045526911962543
+      ],
+      "r_ph": 3.0081829407837892,
+      "b_crit": 5.70189699635286,
+      "rho_crit": 4.252406242638835,
+      "image_radius": 7.654331236749903,
+      "sample_count": 145,
+      "intensity_max": 0.09826999588075461,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [6.286420806134174e-08, 1.5006023090791132e-07]"
+      ]
+    },
+    {
+      "name": "taylor_silk_Lneq_M1_a6",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/taylor_silk_Lneq_M1_a6.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/taylor_silk_Lneq_M1_a6_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/taylor_silk_Lneq_M1_a6_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/taylor_silk_Lneq_M1_a6_image.png",
+      "r_grid": [
+        1.26344554230021,
+        16.741847299583398
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        15.944616475793712
+      ],
+      "r_obs": 9.48076954775442,
+      "disk_window": [
+        3.1677687507008834,
+        8.98076954775442
+      ],
+      "r_ph": 3.016922619715127,
+      "b_crit": 5.98474628294767,
+      "rho_crit": 4.394415404285897,
+      "image_radius": 7.909947727714615,
+      "sample_count": 145,
+      "intensity_max": 0.08999880599247487,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [6.286420806134174e-08, 9.044323512341634e-08]"
+      ]
+    },
+    {
+      "name": "taylor_silk_Lneq_M8p4_a6_multi",
+      "input_npz": "/home/yuanpang/Work/Li-DM-BH/outputs/imaging_metrics/data/taylor_silk_Lneq_M8p4_a6_multi.npz",
+      "profile_csv": "outputs/imaging_metrics_smoke/taylor_silk_Lneq_M8p4_a6_multi_profile.csv",
+      "profile_plot_png": "outputs/imaging_metrics_smoke/taylor_silk_Lneq_M8p4_a6_multi_profile.png",
+      "image_png": "outputs/imaging_metrics_smoke/taylor_silk_Lneq_M8p4_a6_multi_image.png",
+      "r_grid": [
+        1.26344554230021,
+        13.714740428919455
+      ],
+      "static_domain": [
+        2.0277939461512866,
+        13.061657551351862
+      ],
+      "r_obs": 10.385775898243654,
+      "disk_window": [
+        8.095388957392217,
+        9.885775898243654
+      ],
+      "r_ph": 7.709894245135445,
+      "b_crit": 28.673969164466683,
+      "rho_crit": 17.85169349441101,
+      "image_radius": 32.133048289939815,
+      "sample_count": 145,
+      "intensity_max": 0.028308107758626563,
+      "load_warnings": [
+        "metadata horizons residuals in soft window [1.1175857972389736e-07, 4.99478785442875e-07]"
+      ]
+    }
+  ]
+}
