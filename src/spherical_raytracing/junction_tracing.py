@@ -17,7 +17,7 @@ from .junctions import (
 )
 from .observers import FiniteStaticObserver
 from .policies import SolverOptions
-from .solvers import _classify_radial_event
+from .solvers import _classify_radial_event, horizon_event, horizon_termination_reason
 
 
 def _safe_g_metric(metric, u: float, b: float) -> float:
@@ -317,7 +317,7 @@ class StaticJunctionTransferSolver:
             phi = segment.phi_end
             u = segment.u_end
             endpoint = segment.endpoint_event
-            events.append(RayEvent(endpoint, phi, u, region))
+            events.append(horizon_event(metric, endpoint, phi, u, region))
 
             if endpoint == EventType.MAX_PHI:
                 terminal_event = endpoint
@@ -397,7 +397,7 @@ class StaticJunctionTransferSolver:
             hit_inner_boundary=terminal_event == EventType.INNER_BOUNDARY,
             turning_point_count=turning_count,
             max_phi_reached=terminal_event == EventType.MAX_PHI,
-            termination_reason=terminal_event.value,
+            termination_reason=horizon_termination_reason(self.junction.metric_for_region(region), terminal_event, u),
             residuals={"shell_crossing_count": float(len(shell_crossings)), **shell_matching_residuals, **matching_residuals},
         )
         return JunctionRayResult(
@@ -659,7 +659,7 @@ class StaticJunctionHamiltonianSolver:
             )
             segments.append(segment)
             segment_constants.append(SegmentConstants(region=region, E=E, L=L, b=L / E))
-            events.append(RayEvent(endpoint, phi_end, 1.0 / r_end, region))
+            events.append(horizon_event(metric, endpoint, phi_end, 1.0 / r_end, region))
 
             if endpoint == EventType.MAX_PHI:
                 terminal_event = endpoint
@@ -757,7 +757,7 @@ class StaticJunctionHamiltonianSolver:
             hit_inner_boundary=terminal_event == EventType.INNER_BOUNDARY,
             turning_point_count=turning_count,
             max_phi_reached=terminal_event == EventType.MAX_PHI,
-            termination_reason=terminal_event.value,
+            termination_reason=horizon_termination_reason(self.junction.metric_for_region(region), terminal_event, segments[-1].u_end),
             residuals={
                 "max_abs_H": max_abs_H,
                 "max_energy_drift": max_energy_drift,

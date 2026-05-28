@@ -49,6 +49,8 @@ def test_rnds_inward_below_half_b_crit_terminates_at_horizon_with_positive_phi(r
     assert last.radial_direction == "inward"
     r_end = 1.0 / last.u_end
     assert math.isclose(r_end, r_h, rel_tol=1e-6, abs_tol=1e-6)
+    assert result.diagnostics.termination_reason == "black_hole_horizon"
+    assert result.events[-1].message == "black_hole_horizon"
 
 
 def test_rnds_inward_just_below_critical_terminates_at_horizon_with_positive_phi(rnds_setup):
@@ -68,6 +70,7 @@ def test_rnds_inward_just_below_critical_terminates_at_horizon_with_positive_phi
     r_end = 1.0 / last.u_end
     assert math.isclose(r_end, r_h, rel_tol=1e-6, abs_tol=1e-6)
     assert result.diagnostics.hit_horizon is True
+    assert result.diagnostics.termination_reason == "black_hole_horizon"
 
 
 def test_rnds_trace_b_rejects_impact_parameter_above_screen_limit(rnds_setup):
@@ -115,6 +118,8 @@ def test_rnds_outbound_just_above_critical_terminates_at_cosmological_radius(rnd
     assert not math.isclose(r_end, observer.r_obs, rel_tol=1e-3, abs_tol=1e-3)
     assert outbound.phi_end > math.pi / 2
     assert outbound.phi_end < solver.options.max_phi
+    assert result.diagnostics.termination_reason == "cosmological_horizon"
+    assert result.events[-1].message == "cosmological_horizon"
 
 
 def test_ode_rnds_outbound_just_above_critical_terminates_at_cosmological_radius(rnds_setup):
@@ -143,3 +148,4 @@ def test_ode_rnds_outbound_just_above_critical_terminates_at_cosmological_radius
     assert not math.isclose(r_end, observer.r_obs, rel_tol=1e-3, abs_tol=1e-3)
     assert outbound.phi_end > math.pi / 2
     assert outbound.phi_end < solver.options.max_phi
+    assert result.diagnostics.termination_reason == "cosmological_horizon"

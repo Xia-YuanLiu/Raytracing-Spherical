@@ -123,9 +123,10 @@ def test_transfer_solver_stops_at_rnds_horizon_before_inaccessible_shell():
     result = solver.trace_b(0.01)
 
     assert result.shell_crossings == []
-    assert result.termination_reason == "horizon"
+    assert result.termination_reason == "black_hole_horizon"
     assert result.diagnostics.hit_horizon is True
     assert result.events[-1].event_type is EventType.HORIZON
+    assert result.events[-1].message == "black_hole_horizon"
     assert "outer_rnds_no_clean_static_patch" in result.physics_warnings
 
 

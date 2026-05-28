@@ -89,6 +89,34 @@ def _classify_radial_event(
     return default
 
 
+def horizon_termination_reason(metric: StaticSphericalMetric, event_type: EventType, u: float) -> str:
+    if event_type != EventType.HORIZON:
+        return event_type.value
+    if u <= 0.0 or not math.isfinite(u):
+        return event_type.value
+    radius = 1.0 / u
+    r_min, r_max = metric.valid_radial_domain()
+    if math.isfinite(r_min) and math.isclose(
+        radius,
+        r_min,
+        rel_tol=_BOUNDARY_HORIZON_REL_TOL,
+        abs_tol=_BOUNDARY_HORIZON_ABS_TOL,
+    ):
+        return "black_hole_horizon"
+    if math.isfinite(r_max) and math.isclose(
+        radius,
+        r_max,
+        rel_tol=_BOUNDARY_HORIZON_REL_TOL,
+        abs_tol=_BOUNDARY_HORIZON_ABS_TOL,
+    ):
+        return "cosmological_horizon"
+    return event_type.value
+
+
+def horizon_event(metric: StaticSphericalMetric, event_type: EventType, phi: float, u: float, region: str) -> RayEvent:
+    return RayEvent(event_type, phi, u, region, horizon_termination_reason(metric, event_type, u))
+
+
 def _mirror_escape_segment(inbound: RaySegment, max_phi: float) -> RaySegment:
     full_phi_end = 2.0 * inbound.phi_end - inbound.phi_start
     phi_end = min(max_phi, full_phi_end)
@@ -239,7 +267,7 @@ class QuadTransferSolver:
         final_event = outbound.endpoint_event
         events = [
             RayEvent(EventType.TURNING_POINT, inbound.phi_end, u_turn, self.metric.region),
-            RayEvent(final_event, outbound.phi_end, outbound.u_end, self.metric.region),
+            horizon_event(self.metric, final_event, outbound.phi_end, outbound.u_end, self.metric.region),
         ]
         diagnostics = RayDiagnostics(
             estimated_error=estimated_error,
@@ -249,7 +277,7 @@ class QuadTransferSolver:
             hit_inner_boundary=False,
             turning_point_count=1,
             max_phi_reached=final_event == EventType.MAX_PHI,
-            termination_reason=final_event.value,
+            termination_reason=horizon_termination_reason(self.metric, final_event, outbound.u_end),
             residuals={"G_turn": _safe_g(self.metric, u_turn, b)},
         )
         return RayResult(b=b, segments=[inbound, outbound], events=events, critical_status=None, diagnostics=diagnostics)
@@ -295,9 +323,9 @@ class QuadTransferSolver:
         return u_stop, event
 
     def _events_for_endpoint(self, event_type: EventType, phi: float, u: float) -> tuple[list[RayEvent], str]:
-        events = [RayEvent(event_type, phi, u, self.metric.region)]
+        events = [horizon_event(self.metric, event_type, phi, u, self.metric.region)]
         if self.trace_policy.is_terminal(event_type, self.metric.region):
-            return events, event_type.value
+            return events, horizon_termination_reason(self.metric, event_type, u)
         next_region = self._continuation_region(event_type)
         if next_region is None:
             events.append(
@@ -747,7 +775,7 @@ class OdeTrajectorySolver:
             hit_inner_boundary=event_type == EventType.INNER_BOUNDARY,
             turning_point_count=1 if hit_turning else 0,
             max_phi_reached=event_type == EventType.MAX_PHI,
-            termination_reason=event_type.value,
+            termination_reason=horizon_termination_reason(self.metric, event_type, u_end),
             residuals={"max_radial_equation_residual": max(residuals)},
         )
         if hit_turning:
@@ -774,7 +802,7 @@ class OdeTrajectorySolver:
                 hit_inner_boundary=False,
                 turning_point_count=1,
                 max_phi_reached=final_event == EventType.MAX_PHI,
-                termination_reason=final_event.value,
+                termination_reason=horizon_termination_reason(self.metric, final_event, outbound.u_end),
                 residuals={"max_radial_equation_residual": max(residuals)},
             )
             return RayResult(
@@ -782,7 +810,7 @@ class OdeTrajectorySolver:
                 segments=[segment, outbound],
                 events=[
                     RayEvent(EventType.TURNING_POINT, segment.phi_end, segment.u_end, self.metric.region),
-                    RayEvent(final_event, outbound.phi_end, outbound.u_end, self.metric.region),
+                    horizon_event(self.metric, final_event, outbound.phi_end, outbound.u_end, self.metric.region),
                 ],
                 critical_status=quad_result.critical_status,
                 diagnostics=diagnostics,
@@ -790,7 +818,7 @@ class OdeTrajectorySolver:
         return RayResult(
             b=b,
             segments=[segment],
-            events=[RayEvent(event_type, phi_end, u_end, self.metric.region)],
+            events=[horizon_event(self.metric, event_type, phi_end, u_end, self.metric.region)],
             critical_status=quad_result.critical_status,
             diagnostics=diagnostics,
         )
@@ -917,7 +945,7 @@ class HamiltonianTrajectorySolver:
             hit_inner_boundary=event_type == EventType.INNER_BOUNDARY,
             turning_point_count=1 if hit_turning else 0,
             max_phi_reached=event_type == EventType.MAX_PHI,
-            termination_reason=event_type.value,
+            termination_reason=horizon_termination_reason(self.metric, event_type, 1.0 / r_end),
             residuals={
                 "max_hamiltonian_constraint": max(constraints),
                 "energy_residual": energy_residual,
@@ -953,7 +981,7 @@ class HamiltonianTrajectorySolver:
                 segments=[segment, outbound],
                 events=[
                     RayEvent(EventType.TURNING_POINT, segment.phi_end, segment.u_end, self.metric.region),
-                    RayEvent(final_event, outbound.phi_end, outbound.u_end, self.metric.region),
+                    horizon_event(self.metric, final_event, outbound.phi_end, outbound.u_end, self.metric.region),
                 ],
                 critical_status=critical_curve,
                 diagnostics=diagnostics,
@@ -961,7 +989,7 @@ class HamiltonianTrajectorySolver:
         return RayResult(
             b=b,
             segments=[segment],
-            events=[RayEvent(event_type, phi_end, 1.0 / r_end, self.metric.region)],
+            events=[horizon_event(self.metric, event_type, phi_end, 1.0 / r_end, self.metric.region)],
             critical_status=critical_curve,
             diagnostics=diagnostics,
         )
