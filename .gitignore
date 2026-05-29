@@ -8,5 +8,16 @@ __pycache__/
 AGENTS.md
 CONTEXT.md
 _prototype_check/
-docs/
+docs/*
+!docs/artifacts.md
+!docs/api-compatibility.md
+!docs/numerical-validation.md
+!docs/physics-conventions.md
+!docs/adr/
+!docs/adr/*.md
+!docs/plans/
+!docs/plans/*.md
+!docs/review/
+!docs/review/*.md
+outputs/
 LQGBHShadow/

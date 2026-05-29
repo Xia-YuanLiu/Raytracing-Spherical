@@ -176,6 +176,16 @@ print(ray.physics_warnings)
 `StaticJunctionSpacetime` currently supports same-family static junctions:
 Schwarzschild-Schwarzschild, RN-RN, or RN-dS-RN-dS.
 
+## Stability And Validation Docs
+
+- `docs/physics-conventions.md` records coordinate, redshift, shell matching,
+  and termination-event conventions.
+- `docs/numerical-validation.md` records the manufactured-metric validation and
+  benchmark commands.
+- `docs/api-compatibility.md` records the downstream compatibility policy.
+- `docs/artifacts.md` records how generated outputs and fixtures should be
+  handled.
+
 ## Project Layout
 
 ```text
