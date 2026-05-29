@@ -187,6 +187,54 @@ def test_load_metric_npz_decodes_scalar_bytes_params(tmp_path):
     assert payload.metadata.static_domains == ((2.1, 10.0),)
 
 
+def test_synthetic_npz_formats_load_through_canonical_tabulated_metric_path(tmp_path):
+    """Synthetic ``r/A/B`` and Li-DM-BH-style ``r/f/g/B/params`` files both
+    exercise the public load -> domain select -> TabulatedMetric path.
+    """
+    from spherical_raytracing import StaticDomainSelector, TabulatedMetric, load_metric_npz
+
+    r = np.geomspace(2.001, 80.0, 500)
+    A = 1.0 - 2.0 / r
+    B = 1.0 / A
+    standard_path = tmp_path / "synthetic_standard_rab.npz"
+    np.savez(standard_path, r=r, A=A, B=B)
+
+    li_path = tmp_path / "synthetic_li_dm_bh.npz"
+    params = _make_li_params_dict(
+        model="synthetic-schwarzschild",
+        horizons=[2.0],
+        photon_spheres=[3.0],
+        static_domains=[[2.0, None]],
+    )
+    np.savez(
+        li_path,
+        r=r,
+        f=A,
+        g=A,
+        B=B,
+        params=json.dumps(params).encode("utf-8"),
+    )
+
+    with pytest.warns(UserWarning, match="metadata.static_domains"):
+        standard_payload = load_metric_npz(standard_path)
+    li_payload = load_metric_npz(li_path)
+
+    for payload in (standard_payload, li_payload):
+        r_lo, r_hi = StaticDomainSelector().choose(payload)
+        metric = TabulatedMetric(payload=payload, static_domain=(r_lo, r_hi))
+
+        assert payload.r.shape == payload.A.shape == payload.C.shape
+        assert metric.valid_radial_domain()[0] <= 2.001
+        assert math.isclose(metric.A(10.0), 0.8, rel_tol=2e-5)
+        assert math.isfinite(metric.G(1.0 / 10.0, 7.0))
+
+    assert standard_payload.metadata.source_format == "standard-rab"
+    assert standard_payload.metadata.raw_B is None
+    assert li_payload.metadata.source_format == "li-dm-bh"
+    assert li_payload.metadata.raw_B is not None
+    np.testing.assert_allclose(li_payload.C, A, rtol=0, atol=0)
+
+
 # =====================================================================
 # Tracer bullet 4: ValidationGate hard failures
 # =====================================================================
@@ -466,6 +514,588 @@ def test_tabulated_metric_G_raises_when_u_below_grid_support():
         metric.G(u=0.0, b=5.0)  # r = infinity
     with pytest.raises(ValueError):
         metric.G(u=1.0 / 1000.0, b=5.0)  # r = 1000 > r_grid_max = 50
+
+
+def test_tabulated_metric_G_array_matches_scalar_G():
+    from spherical_raytracing import TabulatedMetric
+
+    payload = _build_schwarzschild_payload(r_lo=2.0, r_hi=200.0, num=1000)
+    metric = TabulatedMetric(payload=payload, static_domain=(2.0, math.inf))
+    b = 7.0
+    u_values = 1.0 / np.array([4.0, 6.0, 10.0, 25.0, 80.0])
+
+    actual = metric._G_array(u_values, b)
+    expected = np.array([metric.G(float(u), b) for u in u_values])
+
+    np.testing.assert_allclose(actual, expected, rtol=1e-14, atol=1e-14)
+
+
+def test_tabulated_metric_G_array_raises_for_scalar_guard_cases():
+    from spherical_raytracing import TabulatedMetric
+
+    payload = _build_schwarzschild_payload(r_lo=2.0, r_hi=50.0, num=400)
+    metric = TabulatedMetric(payload=payload, static_domain=(2.0, 40.0))
+
+    with pytest.raises(ValueError, match="b must be positive"):
+        metric._G_array(np.array([1.0 / 10.0]), b=0.0)
+    with pytest.raises(ValueError, match="requires u>0"):
+        metric._G_array(np.array([1.0 / 10.0, 0.0]), b=5.0)
+    with pytest.raises(ValueError, match="above tabulated grid"):
+        metric._G_array(np.array([1.0 / 1000.0]), b=5.0)
+    with pytest.raises(ValueError, match="outside static domain"):
+        metric._G_array(np.array([1.0 / 2.0]), b=5.0)
+
+
+def test_tabulated_metric_G_array_raises_on_nonfinite_pchip_result():
+    from spherical_raytracing import TabulatedMetric
+
+    payload = _build_schwarzschild_payload(r_lo=2.0, r_hi=50.0, num=400)
+    metric = TabulatedMetric(payload=payload, static_domain=(2.0, math.inf))
+
+    class NanPchip:
+        def __call__(self, values):
+            return np.full_like(np.asarray(values, dtype=float), np.nan)
+
+    metric._A_pchip = NanPchip()
+    with pytest.raises(ValueError, match="non-finite"):
+        metric._G_array(np.array([1.0 / 10.0]), b=5.0)
+
+
+def _assert_optional_roots_match(actual: float | None, expected: float | None) -> None:
+    if expected is None:
+        assert actual is None
+    else:
+        assert actual is not None
+        np.testing.assert_allclose(actual, expected, rtol=1e-13, atol=1e-13)
+
+
+def test_quad_turning_search_vectorized_matches_scalar_for_no_root_captured_and_turning():
+    from spherical_raytracing import (
+        EventType,
+        FiniteStaticObserver,
+        QuadTransferSolver,
+        SolverOptions,
+        TabulatedMetric,
+    )
+
+    payload = _build_schwarzschild_payload(r_lo=2.0, r_hi=200.0, num=3000)
+    metric = TabulatedMetric(payload=payload, static_domain=(2.0, math.inf))
+    observer = FiniteStaticObserver(r_obs=80.0, metric=metric)
+    solver = QuadTransferSolver(
+        metric=metric,
+        observer=observer,
+        options=SolverOptions(critical_exclusion=0.0),
+    )
+    u_start = observer.u_start
+    u_stop, _event = solver._inward_stop_u()
+    b_crit = metric.critical_curves()[0].b_crit
+
+    no_root_stop = u_start + 0.10 * (u_stop - u_start)
+    _assert_optional_roots_match(
+        solver._first_turning_point(1.20 * b_crit, u_start, no_root_stop),
+        solver._first_turning_point_scalar(1.20 * b_crit, u_start, no_root_stop),
+    )
+
+    captured_b = 0.50 * b_crit
+    _assert_optional_roots_match(
+        solver._first_turning_point(captured_b, u_start, u_stop),
+        solver._first_turning_point_scalar(captured_b, u_start, u_stop),
+    )
+    captured = solver.trace_b(captured_b)
+    assert captured.segments[-1].endpoint_event == EventType.HORIZON
+    assert captured.diagnostics.turning_point_count == 0
+
+    turning_b = 1.20 * b_crit
+    scalar_turn = solver._first_turning_point_scalar(turning_b, u_start, u_stop)
+    vector_turn = solver._first_turning_point(turning_b, u_start, u_stop)
+    assert scalar_turn is not None
+    _assert_optional_roots_match(vector_turn, scalar_turn)
+
+
+def test_turning_search_vectorized_preserves_descending_scan_direction():
+    from spherical_raytracing import SolverOptions, TabulatedMetric
+    from spherical_raytracing._turning import (
+        _first_turning_point_scalar_scan,
+        _first_turning_point_scan,
+    )
+
+    payload = _build_schwarzschild_payload(r_lo=2.0, r_hi=200.0, num=3000)
+    metric = TabulatedMetric(payload=payload, static_domain=(2.0, math.inf))
+    b = 1.20 * metric.critical_curves()[0].b_crit
+    u_start = 0.49
+    u_stop = 0.10
+    options = SolverOptions()
+
+    scalar_turn = _first_turning_point_scalar_scan(
+        metric,
+        b,
+        u_start,
+        u_stop,
+        options,
+        allow_descending=True,
+    )
+    vector_turn = _first_turning_point_scan(
+        metric,
+        b,
+        u_start,
+        u_stop,
+        options,
+        allow_descending=True,
+    )
+
+    assert scalar_turn is not None
+    _assert_optional_roots_match(vector_turn, scalar_turn)
+
+
+def _build_rnds_tabulated_metric(num=3000):
+    from spherical_raytracing import (
+        CanonicalPayload,
+        LiDMBHMetadata,
+        ReissnerNordstromDeSitterMetric,
+        TabulatedMetric,
+    )
+
+    analytical = ReissnerNordstromDeSitterMetric(
+        mass=1.0,
+        charge=0.0,
+        cosmological_constant=0.01,
+    )
+    r_lo, r_hi = analytical.valid_radial_domain()
+    r_start = r_lo + max(abs(r_lo), 1.0) * 1e-5
+    r_stop = r_hi - max(abs(r_hi), 1.0) * 1e-5
+    r = np.geomspace(r_start, r_stop, num)
+    A = np.array([analytical.A(float(value)) for value in r])
+    C = A.copy()
+    metadata = LiDMBHMetadata.from_params(
+        params={
+            "model": "rnds",
+            "static_domains": [[r_lo, r_hi]],
+            "horizons": analytical.horizons(),
+            "photon_spheres": analytical.photon_spheres(),
+            "g_convention": "g_rr_inverse",
+            "B_convention": "g_rr",
+        },
+        source_format="li-dm-bh",
+        original_keys=("r", "f", "g", "B", "params"),
+        raw_B=1.0 / C,
+    )
+    return TabulatedMetric(
+        payload=CanonicalPayload(r=r, A=A, C=C, metadata=metadata),
+        static_domain=(r_lo, r_hi),
+    )
+
+
+def test_quad_turning_search_vectorized_matches_scalar_on_finite_bounded_domain():
+    from spherical_raytracing import FiniteStaticObserver, QuadTransferSolver, SolverOptions
+
+    metric = _build_rnds_tabulated_metric()
+    observer = FiniteStaticObserver(r_obs=6.0, metric=metric)
+    solver = QuadTransferSolver(
+        metric=metric,
+        observer=observer,
+        options=SolverOptions(critical_exclusion=0.0),
+    )
+    b = 1.05 * metric.critical_curves()[0].b_crit
+    u_start = observer.u_start
+    u_stop, _event = solver._inward_stop_u()
+
+    scalar_turn = solver._first_turning_point_scalar(b, u_start, u_stop)
+    vector_turn = solver._first_turning_point(b, u_start, u_stop)
+
+    assert scalar_turn is not None
+    _assert_optional_roots_match(vector_turn, scalar_turn)
+
+
+def _reference_quad_solver(metric, observer, options):
+    from spherical_raytracing import QuadTransferSolver
+
+    class ReferenceQuadTransferSolver(QuadTransferSolver):
+        def _first_turning_point(self, b: float, u_start: float, u_stop: float) -> float | None:
+            return self._first_turning_point_scalar(b, u_start, u_stop)
+
+        def _make_segment(
+            self,
+            b: float,
+            u0: float,
+            u1: float,
+            phi0: float,
+            direction: str,
+            endpoint_event,
+            region: str,
+        ):
+            return self._make_segment_quad_reference(
+                b=b,
+                u0=u0,
+                u1=u1,
+                phi0=phi0,
+                direction=direction,
+                endpoint_event=endpoint_event,
+                region=region,
+            )
+
+    return ReferenceQuadTransferSolver(metric=metric, observer=observer, options=options)
+
+
+def _assert_fast_ray_matches_reference(actual, expected, *, rtol=2e-8, atol=2e-8):
+    assert actual.diagnostics.termination_reason == expected.diagnostics.termination_reason
+    assert len(actual.segments) == len(expected.segments)
+    assert [segment.endpoint_event for segment in actual.segments] == [
+        segment.endpoint_event for segment in expected.segments
+    ]
+
+    for actual_segment, expected_segment in zip(actual.segments, expected.segments):
+        np.testing.assert_allclose(actual_segment.phi_end, expected_segment.phi_end, rtol=rtol, atol=atol)
+        np.testing.assert_allclose(actual_segment.u_end, expected_segment.u_end, rtol=rtol, atol=atol)
+
+        span = expected_segment.phi_end - expected_segment.phi_start
+        for fraction in (0.20, 0.50, 0.80):
+            phi = expected_segment.phi_start + fraction * span
+            if actual_segment.contains_phi(phi):
+                np.testing.assert_allclose(
+                    actual_segment.u_at(phi),
+                    expected_segment.u_at(phi),
+                    rtol=rtol,
+                    atol=atol,
+                )
+
+
+def _assert_segment_and_error_match_reference(
+    actual,
+    actual_error,
+    expected,
+    expected_error,
+    *,
+    rtol=1e-13,
+    atol=1e-13,
+):
+    assert actual.region == expected.region
+    assert actual.radial_direction == expected.radial_direction
+    assert actual.endpoint_event == expected.endpoint_event
+    np.testing.assert_allclose(actual.phi_start, expected.phi_start, rtol=rtol, atol=atol)
+    np.testing.assert_allclose(actual.phi_end, expected.phi_end, rtol=rtol, atol=atol)
+    np.testing.assert_allclose(actual.u_start, expected.u_start, rtol=rtol, atol=atol)
+    np.testing.assert_allclose(actual.u_end, expected.u_end, rtol=rtol, atol=atol)
+    np.testing.assert_allclose(actual_error, expected_error, rtol=rtol, atol=atol)
+
+    span = expected.phi_end - expected.phi_start
+    for fraction in (0.0, 0.25, 0.50, 0.75, 1.0):
+        phi = expected.phi_start + fraction * span
+        assert actual.contains_phi(phi) == expected.contains_phi(phi)
+        np.testing.assert_allclose(actual.u_at(phi), expected.u_at(phi), rtol=rtol, atol=atol)
+
+
+def test_quad_fast_segments_match_reference_for_core_ray_categories():
+    from spherical_raytracing import FiniteStaticObserver, QuadTransferSolver, SolverOptions, TabulatedMetric
+
+    payload = _build_schwarzschild_payload(r_lo=2.0, r_hi=300.0, num=4000)
+    metric = TabulatedMetric(payload=payload, static_domain=(2.0, math.inf))
+    observer = FiniteStaticObserver(r_obs=80.0, metric=metric)
+    options = SolverOptions(critical_exclusion=0.0)
+    fast_solver = QuadTransferSolver(metric=metric, observer=observer, options=options)
+    reference_solver = _reference_quad_solver(metric, observer, options)
+    b_crit = metric.critical_curves()[0].b_crit
+
+    for b in (0.60 * b_crit, 1.15 * b_crit, 2.50 * b_crit):
+        actual = fast_solver.trace_b(float(b))
+        expected = reference_solver.trace_b(float(b))
+        _assert_fast_ray_matches_reference(actual, expected)
+
+    stats = fast_solver._fast_segment_stats
+    assert stats["accepted"] > 0
+    assert stats["attempted"] >= stats["accepted"]
+
+
+def test_quad_fast_segments_match_reference_for_max_phi_truncation():
+    from spherical_raytracing import FiniteStaticObserver, QuadTransferSolver, SolverOptions, TabulatedMetric
+
+    payload = _build_schwarzschild_payload(r_lo=2.0, r_hi=300.0, num=4000)
+    metric = TabulatedMetric(payload=payload, static_domain=(2.0, math.inf))
+    observer = FiniteStaticObserver(r_obs=80.0, metric=metric)
+    options = SolverOptions(critical_exclusion=0.0, max_phi=0.35)
+    fast_solver = QuadTransferSolver(metric=metric, observer=observer, options=options)
+    reference_solver = _reference_quad_solver(metric, observer, options)
+    b = 1.20 * metric.critical_curves()[0].b_crit
+
+    actual = fast_solver.trace_b(b)
+    expected = reference_solver.trace_b(b)
+
+    assert actual.diagnostics.max_phi_reached
+    _assert_fast_ray_matches_reference(actual, expected)
+    assert fast_solver._fast_segment_stats["accepted"] > 0
+
+
+def test_quad_fast_segments_match_reference_for_finite_bounded_domain():
+    from spherical_raytracing import FiniteStaticObserver, QuadTransferSolver, SolverOptions
+
+    metric = _build_rnds_tabulated_metric(num=4000)
+    observer = FiniteStaticObserver(r_obs=6.0, metric=metric)
+    options = SolverOptions(critical_exclusion=0.0)
+    fast_solver = QuadTransferSolver(metric=metric, observer=observer, options=options)
+    reference_solver = _reference_quad_solver(metric, observer, options)
+    b = 1.05 * metric.critical_curves()[0].b_crit
+
+    actual = fast_solver.trace_b(b)
+    expected = reference_solver.trace_b(b)
+
+    _assert_fast_ray_matches_reference(actual, expected, rtol=5e-8, atol=5e-8)
+    assert fast_solver._fast_segment_stats["accepted"] > 0
+
+
+def test_quad_fast_segment_falls_back_when_vectorized_samples_are_forbidden():
+    from spherical_raytracing import EventType, FiniteStaticObserver, QuadTransferSolver, SolverOptions, TabulatedMetric
+
+    payload = _build_schwarzschild_payload(r_lo=2.0, r_hi=200.0, num=3000)
+    metric = TabulatedMetric(payload=payload, static_domain=(2.0, math.inf))
+    observer = FiniteStaticObserver(r_obs=80.0, metric=metric)
+    solver = QuadTransferSolver(
+        metric=metric,
+        observer=observer,
+        options=SolverOptions(critical_exclusion=0.0),
+    )
+    b = 0.60 * metric.critical_curves()[0].b_crit
+    u0 = observer.u_start
+    u1, endpoint_event = solver._inward_stop_u()
+
+    def forbidden_g_array(u_values, b_value):
+        return -np.ones_like(np.asarray(u_values, dtype=float))
+
+    metric._G_array = forbidden_g_array
+    actual, actual_error = solver._make_segment(
+        b=b,
+        u0=u0,
+        u1=u1,
+        phi0=0.0,
+        direction="inward",
+        endpoint_event=endpoint_event,
+        region=metric.region,
+    )
+    expected, expected_error = solver._make_segment_quad_reference(
+        b=b,
+        u0=u0,
+        u1=u1,
+        phi0=0.0,
+        direction="inward",
+        endpoint_event=endpoint_event,
+        region=metric.region,
+    )
+
+    assert actual.endpoint_event == EventType.HORIZON
+    np.testing.assert_allclose(actual.phi_end, expected.phi_end, rtol=0, atol=0)
+    np.testing.assert_allclose(actual.u_end, expected.u_end, rtol=0, atol=0)
+    np.testing.assert_allclose(actual_error, expected_error, rtol=0, atol=0)
+    assert solver._fast_segment_stats["accepted"] == 0
+    assert solver._fast_segment_stats["fallback"] == 1
+
+
+def test_quad_fast_inbound_turning_segment_falls_back_to_reference_when_vectorized_samples_fail():
+    from spherical_raytracing import EventType, FiniteStaticObserver, QuadTransferSolver, SolverOptions, TabulatedMetric
+
+    payload = _build_schwarzschild_payload(r_lo=2.0, r_hi=300.0, num=4000)
+    metric = TabulatedMetric(payload=payload, static_domain=(2.0, 200.0))
+    observer = FiniteStaticObserver(r_obs=80.0, metric=metric)
+    solver = QuadTransferSolver(
+        metric=metric,
+        observer=observer,
+        options=SolverOptions(critical_exclusion=0.0),
+    )
+    b = 1.20 * metric.critical_curves()[0].b_crit
+    u0 = observer.u_start
+    u_stop, _event = solver._inward_stop_u()
+    u_turn = solver._first_turning_point_scalar(b, u0, u_stop)
+    assert u_turn is not None
+
+    def forbidden_g_array(u_values, b_value):
+        raise ValueError("forced vector fallback")
+
+    metric._G_array = forbidden_g_array
+    actual, actual_error = solver._make_segment(
+        b=b,
+        u0=u0,
+        u1=u_turn,
+        phi0=0.0,
+        direction="inward",
+        endpoint_event=EventType.TURNING_POINT,
+        region=metric.region,
+    )
+    expected, expected_error = solver._make_segment_quad_reference(
+        b=b,
+        u0=u0,
+        u1=u_turn,
+        phi0=0.0,
+        direction="inward",
+        endpoint_event=EventType.TURNING_POINT,
+        region=metric.region,
+    )
+
+    _assert_segment_and_error_match_reference(actual, actual_error, expected, expected_error)
+    assert solver._fast_segment_stats["accepted"] == 0
+    assert solver._fast_segment_stats["fallback"] == 1
+
+
+def test_quad_fast_outbound_transformed_segment_falls_back_to_reference_when_vectorized_samples_fail():
+    from spherical_raytracing import FiniteStaticObserver, QuadTransferSolver, SolverOptions, TabulatedMetric
+
+    payload = _build_schwarzschild_payload(r_lo=2.0, r_hi=300.0, num=4000)
+    metric = TabulatedMetric(payload=payload, static_domain=(2.0, 200.0))
+    observer = FiniteStaticObserver(r_obs=80.0, metric=metric)
+    solver = QuadTransferSolver(
+        metric=metric,
+        observer=observer,
+        options=SolverOptions(critical_exclusion=0.0),
+    )
+    b = 1.20 * metric.critical_curves()[0].b_crit
+    u_start = observer.u_start
+    u_stop, _event = solver._inward_stop_u()
+    u_turn = solver._first_turning_point_scalar(b, u_start, u_stop)
+    assert u_turn is not None
+    u_outward_stop, outward_event = solver._outward_stop_u()
+
+    def forbidden_g_array(u_values, b_value):
+        raise ValueError("forced vector fallback")
+
+    metric._G_array = forbidden_g_array
+    actual, actual_error = solver._make_segment(
+        b=b,
+        u0=u_turn,
+        u1=u_outward_stop,
+        phi0=0.75,
+        direction="outward",
+        endpoint_event=outward_event,
+        region=metric.region,
+    )
+    expected, expected_error = solver._make_segment_quad_reference(
+        b=b,
+        u0=u_turn,
+        u1=u_outward_stop,
+        phi0=0.75,
+        direction="outward",
+        endpoint_event=outward_event,
+        region=metric.region,
+    )
+
+    _assert_segment_and_error_match_reference(actual, actual_error, expected, expected_error)
+    assert solver._fast_segment_stats["accepted"] == 0
+    assert solver._fast_segment_stats["fallback"] == 1
+
+
+def test_quad_fast_segment_falls_back_to_reference_when_endpoint_angle_inversion_fails_late():
+    from spherical_raytracing import FiniteStaticObserver, QuadTransferSolver, SolverOptions, TabulatedMetric
+
+    payload = _build_schwarzschild_payload(r_lo=2.0, r_hi=300.0, num=4000)
+    metric = TabulatedMetric(payload=payload, static_domain=(2.0, math.inf))
+    observer = FiniteStaticObserver(r_obs=80.0, metric=metric)
+    solver = QuadTransferSolver(
+        metric=metric,
+        observer=observer,
+        options=SolverOptions(critical_exclusion=0.0, max_phi=0.05),
+    )
+    b = 0.60 * metric.critical_curves()[0].b_crit
+    u0 = observer.u_start
+    u1, endpoint_event = solver._inward_stop_u()
+    original_g_array = metric._G_array
+    call_count = {"count": 0}
+
+    def fail_after_segment_width(u_values, b_value):
+        call_count["count"] += 1
+        if call_count["count"] > 2:
+            raise ValueError("forced endpoint inversion fallback")
+        return original_g_array(u_values, b_value)
+
+    metric._G_array = fail_after_segment_width
+    actual, actual_error = solver._make_segment(
+        b=b,
+        u0=u0,
+        u1=u1,
+        phi0=0.0,
+        direction="inward",
+        endpoint_event=endpoint_event,
+        region=metric.region,
+    )
+    expected, expected_error = solver._make_segment_quad_reference(
+        b=b,
+        u0=u0,
+        u1=u1,
+        phi0=0.0,
+        direction="inward",
+        endpoint_event=endpoint_event,
+        region=metric.region,
+    )
+
+    _assert_segment_and_error_match_reference(actual, actual_error, expected, expected_error)
+    assert solver._fast_segment_stats["accepted"] == 0
+    assert solver._fast_segment_stats["fallback"] == 1
+
+
+def test_quad_fast_segment_runtime_late_fallback_keeps_reference_semantics():
+    from spherical_raytracing import FiniteStaticObserver, QuadTransferSolver, SolverOptions, TabulatedMetric
+
+    payload = _build_schwarzschild_payload(r_lo=2.0, r_hi=300.0, num=4000)
+    metric = TabulatedMetric(payload=payload, static_domain=(2.0, math.inf))
+    observer = FiniteStaticObserver(r_obs=80.0, metric=metric)
+    solver = QuadTransferSolver(
+        metric=metric,
+        observer=observer,
+        options=SolverOptions(critical_exclusion=0.0),
+    )
+    b = 0.60 * metric.critical_curves()[0].b_crit
+    u0 = observer.u_start
+    u1, endpoint_event = solver._inward_stop_u()
+    original_g_array = metric._G_array
+    call_count = {"count": 0}
+
+    def fail_after_accepted_segment(u_values, b_value):
+        call_count["count"] += 1
+        if call_count["count"] > 2:
+            raise ValueError("forced runtime late fallback")
+        return original_g_array(u_values, b_value)
+
+    metric._G_array = fail_after_accepted_segment
+    actual, _actual_error = solver._make_segment(
+        b=b,
+        u0=u0,
+        u1=u1,
+        phi0=0.0,
+        direction="inward",
+        endpoint_event=endpoint_event,
+        region=metric.region,
+    )
+    expected, _expected_error = solver._make_segment_quad_reference(
+        b=b,
+        u0=u0,
+        u1=u1,
+        phi0=0.0,
+        direction="inward",
+        endpoint_event=endpoint_event,
+        region=metric.region,
+    )
+    assert solver._fast_segment_stats["accepted"] == 1
+    assert solver._fast_segment_stats["fallback"] == 0
+
+    np.testing.assert_allclose(actual.phi_end, expected.phi_end, rtol=2e-8, atol=2e-8)
+    np.testing.assert_allclose(actual.u_end, expected.u_end, rtol=2e-8, atol=2e-8)
+    assert actual.endpoint_event == expected.endpoint_event
+    phi = actual.phi_start + 0.5 * (actual.phi_end - actual.phi_start)
+    np.testing.assert_allclose(actual.u_at(phi), expected.u_at(phi), rtol=2e-8, atol=2e-8)
+    assert solver._fast_segment_stats["late_fallback"] == 1
+
+
+def test_quad_fast_segments_match_reference_on_real_li_metric_smoke(li_dm_bh_payloads):
+    from spherical_raytracing import FiniteStaticObserver, QuadTransferSolver, SolverOptions, StaticDomainSelector, TabulatedMetric
+
+    payload = li_dm_bh_payloads["nfw_L0.npz"]
+    r_lo, r_hi = StaticDomainSelector().choose(payload)
+    metric = TabulatedMetric(payload=payload, static_domain=(r_lo, r_hi))
+    observer = FiniteStaticObserver(r_obs=30.0, metric=metric)
+    options = SolverOptions(critical_exclusion=0.0)
+    fast_solver = QuadTransferSolver(metric=metric, observer=observer, options=options)
+    reference_solver = _reference_quad_solver(metric, observer, options)
+    b = 1.15 * metric.critical_curves()[0].b_crit
+
+    actual = fast_solver.trace_b(b)
+    expected = reference_solver.trace_b(b)
+
+    _assert_fast_ray_matches_reference(actual, expected, rtol=2e-7, atol=2e-7)
+    assert fast_solver._fast_segment_stats["attempted"] > 0
 
 
 # =====================================================================

@@ -450,6 +450,41 @@ class TabulatedMetric:
         c = float(self._C_pchip(r))
         return c * (1.0 / (a * b * b) - u * u)
 
+    def _G_array(self, u_values: np.ndarray, b: float) -> np.ndarray:
+        """Vectorized counterpart of :meth:`G` for private solver fast paths."""
+        if not b > 0.0:
+            raise ValueError("b must be positive")
+
+        u = np.asarray(u_values, dtype=float)
+        if np.any(~(u > 0.0)):
+            raise ValueError(
+                "TabulatedMetric.G requires u>0; r=1/u=inf has no tabulated support "
+                "(use FiniteStaticObserver, not InfinityObserver)"
+            )
+
+        r = 1.0 / u
+        if np.any(r > self._r_grid_max):
+            raise ValueError(
+                f"u_values map above tabulated grid r_max={self._r_grid_max}"
+            )
+
+        lo, hi = self._domain
+        if np.any((r <= lo) | (r >= hi)):
+            raise ValueError(
+                f"r values outside static domain {self._domain} (TabulatedMetric)"
+            )
+        if np.any(r < self._r_grid_min):
+            raise ValueError(
+                f"u_values map below tabulated grid r_min={self._r_grid_min} "
+                "(TabulatedMetric has no extrapolation support)"
+            )
+
+        a = np.asarray(self._A_pchip(r), dtype=float)
+        c = np.asarray(self._C_pchip(r), dtype=float)
+        if np.any(~np.isfinite(a)) or np.any(~np.isfinite(c)):
+            raise ValueError("PCHIP interpolation returned non-finite values")
+        return c * (1.0 / (a * b * b) - u * u)
+
     # ------------------------------------------------------------------
     # Roots: metadata first, otherwise infer from interpolated table
     # ------------------------------------------------------------------

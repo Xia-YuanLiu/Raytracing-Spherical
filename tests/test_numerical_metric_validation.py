@@ -5,9 +5,8 @@ Default phase for ``docs/plans/numerical-metric-validation-plan.md``:
 - L1: core metric-component validation for metadata-rich and standard r/A/B payloads.
 - L2: small b-sweep ray validation on representative analytical families.
 - L3: one thin-disk intersection plus observed_intensity smoke.
+- L4: deterministic Schwarzschild grid-convergence smoke on benign rays.
 
-TODO(L4): add a slow grid-convergence study that checks median/p95 trends on a
-stable ray set as grid density increases.
 TODO(L5): add a single-metric backend sanity comparator for Quad/ODE/Hamiltonian
 once that public comparator exists.
 """
@@ -69,6 +68,12 @@ RAY_CASES = [
         {"mass": 1.0, "charge": 0.5, "cosmological_constant": 0.01},
         id="rnds_q0p5_lam0p01",
     ),
+]
+
+L4_GRID_CASES = [
+    (800, 8.0e-7, 1.0e-7, 3.0e-5),
+    (1600, 8.0e-8, 1.0e-8, 3.0e-6),
+    (3200, 2.0e-8, 2.0e-9, 3.0e-7),
 ]
 
 
@@ -314,3 +319,148 @@ def test_l3_thin_disk_intersection_and_observed_intensity_smoke():
     np.testing.assert_allclose(observed_n.total, observed_a.total, rtol=5e-3, atol=1e-10)
     np.testing.assert_allclose(observed_n.redshift_weights, observed_a.redshift_weights, rtol=5e-3, atol=1e-10)
     np.testing.assert_allclose(observed_n.contributions, observed_a.contributions, rtol=5e-3, atol=1e-10)
+
+
+def _schwarzschild_l4_reference_cases():
+    analytical = SchwarzschildMetric(mass=1.0)
+    manufactured = manufacture_numerical_metric(
+        analytical,
+        n_points=6400,
+        payload_style="metadata",
+    )
+    observer = FiniteStaticObserver(r_obs=manufactured.r_obs, metric=analytical)
+    solver = QuadTransferSolver(metric=analytical, observer=observer)
+    b_crit = _reachable_curves_in_domain(analytical, _external_static_domain(analytical))[-1].b_crit
+    b_max = manufactured.r_obs / math.sqrt(analytical.A(manufactured.r_obs))
+    b_values = [
+        pytest.param(0.70 * b_crit, id="captured_0p70_bcrit"),
+        pytest.param(1.10 * b_crit, id="turning_1p10_bcrit"),
+        pytest.param(min(1.35 * b_crit, 0.70 * b_max), id="wide_turning_stable"),
+    ]
+    references = [(float(param.values[0]), solver.trace_b(float(param.values[0]))) for param in b_values]
+    return analytical, manufactured.r_obs, references
+
+
+def _assert_l4_result_matches_reference(
+    *,
+    density: int,
+    b: float,
+    actual,
+    expected,
+    phi_abs: float,
+    u_probe_abs: float,
+    intersection_r_abs: float,
+) -> None:
+    assert actual.diagnostics.termination_reason == expected.diagnostics.termination_reason, (
+        f"L4 event classification mismatch at n={density}, b={b}: "
+        f"{actual.diagnostics.termination_reason} != {expected.diagnostics.termination_reason}"
+    )
+    assert len(actual.segments) == len(expected.segments), (
+        f"L4 event classification mismatch at n={density}, b={b}: segment count differs"
+    )
+    assert [segment.endpoint_event for segment in actual.segments] == [
+        segment.endpoint_event for segment in expected.segments
+    ], f"L4 event classification mismatch at n={density}, b={b}: endpoint events differ"
+
+    actual_last = actual.segments[-1]
+    expected_last = expected.segments[-1]
+    np.testing.assert_allclose(
+        actual_last.phi_end,
+        expected_last.phi_end,
+        rtol=0.0,
+        atol=phi_abs,
+        err_msg=f"L4 convergence phi_end drift at n={density}, b={b}",
+    )
+    np.testing.assert_allclose(
+        actual_last.u_end,
+        expected_last.u_end,
+        rtol=0.0,
+        atol=u_probe_abs,
+        err_msg=f"L4 convergence u_end drift at n={density}, b={b}",
+    )
+
+    for segment_index, (actual_segment, expected_segment) in enumerate(zip(actual.segments, expected.segments)):
+        span = expected_segment.phi_end - expected_segment.phi_start
+        for fraction in (0.33, 0.67):
+            phi = expected_segment.phi_start + fraction * span
+            assert actual_segment.contains_phi(phi), (
+                f"L4 fixture construction mismatch at n={density}, b={b}: "
+                f"probe phi={phi} missing from segment {segment_index}"
+            )
+            np.testing.assert_allclose(
+                actual_segment.u_at(phi),
+                expected_segment.u_at(phi),
+                rtol=0.0,
+                atol=u_probe_abs,
+                err_msg=f"L4 convergence u_at drift at n={density}, b={b}, segment={segment_index}",
+            )
+
+    disk = DiskWindow(r_min=6.0, r_max=45.0)
+    actual_intersections = compute_intersections(actual, disk, max_order=3)
+    expected_intersections = compute_intersections(expected, disk, max_order=3)
+    assert len(actual_intersections) == len(expected_intersections), (
+        f"L4 fixture construction mismatch at n={density}, b={b}: disk crossing count differs"
+    )
+    for actual_intersection, expected_intersection in zip(actual_intersections, expected_intersections):
+        assert actual_intersection.m == expected_intersection.m
+        assert actual_intersection.region == expected_intersection.region
+        assert actual_intersection.path_class == expected_intersection.path_class
+        np.testing.assert_allclose(
+            actual_intersection.r,
+            expected_intersection.r,
+            rtol=0.0,
+            atol=intersection_r_abs,
+            err_msg=f"L4 convergence disk radius drift at n={density}, b={b}",
+        )
+
+
+def test_l4_schwarzschild_grid_convergence_smoke():
+    analytical, r_obs, reference_cases = _schwarzschild_l4_reference_cases()
+
+    for density, phi_abs, u_probe_abs, intersection_r_abs in L4_GRID_CASES:
+        manufactured = manufacture_numerical_metric(
+            analytical,
+            n_points=density,
+            payload_style="metadata",
+        )
+        assert manufactured.r_obs == r_obs, f"L4 fixture construction mismatch at n={density}: observer moved"
+        observer = FiniteStaticObserver(r_obs=r_obs, metric=manufactured.numerical)
+        solver = QuadTransferSolver(metric=manufactured.numerical, observer=observer)
+
+        for b, expected in reference_cases:
+            actual = solver.trace_b(b)
+            _assert_l4_result_matches_reference(
+                density=density,
+                b=b,
+                actual=actual,
+                expected=expected,
+                phi_abs=phi_abs,
+                u_probe_abs=u_probe_abs,
+                intersection_r_abs=intersection_r_abs,
+            )
+
+
+@pytest.mark.slow
+def test_l4_schwarzschild_grid_convergence_slow_scaffold():
+    analytical, r_obs, reference_cases = _schwarzschild_l4_reference_cases()
+
+    for density in (800, 1600, 3200, 6400):
+        manufactured = manufacture_numerical_metric(
+            analytical,
+            n_points=density,
+            payload_style="metadata",
+        )
+        observer = FiniteStaticObserver(r_obs=r_obs, metric=manufactured.numerical)
+        solver = QuadTransferSolver(metric=manufactured.numerical, observer=observer)
+
+        for b, expected in reference_cases:
+            actual = solver.trace_b(b)
+            _assert_l4_result_matches_reference(
+                density=density,
+                b=b,
+                actual=actual,
+                expected=expected,
+                phi_abs=8.0e-7,
+                u_probe_abs=1.0e-7,
+                intersection_r_abs=3.0e-5,
+            )

@@ -24,3 +24,7 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+addopts = ["-m", "not slow"]
+markers = [
+  "slow: slower validation scaffolds that are excluded from default quick checks",
+]

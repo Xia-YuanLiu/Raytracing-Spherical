@@ -4,9 +4,10 @@ import math
 from dataclasses import dataclass, replace
 
 import numpy as np
-from scipy.integrate import quad, solve_ivp
-from scipy.optimize import brentq
+from scipy.integrate import solve_ivp
 
+from ._segments import make_quad_segment
+from ._turning import _first_turning_point_scalar_scan, _first_turning_point_scan
 from .diagnostics import CriticalCurve, EventType, RayDiagnostics, RayEvent, RaySegment
 from .junctions import (
     JunctionRayResult,
@@ -107,112 +108,40 @@ class StaticJunctionTransferSolver:
         endpoint_event: EventType,
         region: str,
     ) -> tuple[RaySegment, float]:
-        if u1 < u0:
-            low, high = u1, u0
-        else:
-            low, high = u0, u1
-
-        def integrand(u: float) -> float:
-            return 1.0 / math.sqrt(max(_safe_g_metric(metric, u, b), 1e-300))
-
-        def integrate_to(target_u: float) -> tuple[float, float]:
-            if endpoint_event == EventType.TURNING_POINT and abs(u1 - u0) > 0.0:
-                span = abs(u1 - u0)
-                distance_to_turn = abs(u1 - target_u)
-                target_x = 1.0 - math.sqrt(max(distance_to_turn, 0.0) / span)
-
-                def transformed_integrand(x: float) -> float:
-                    distance = 1.0 - x
-                    if u1 >= u0:
-                        u = u1 - span * distance**2
-                    else:
-                        u = u1 + span * distance**2
-                    return 2.0 * span * distance * integrand(u)
-
-                return quad(
-                    transformed_integrand,
-                    0.0,
-                    target_x,
-                    epsabs=self.options.quad_epsabs,
-                    epsrel=self.options.quad_epsrel,
-                    limit=200,
-                )
-            value, error = quad(
-                integrand,
-                low,
-                target_u if u1 >= u0 else high,
-                epsabs=self.options.quad_epsabs,
-                epsrel=self.options.quad_epsrel,
-                limit=200,
-            )
-            if u1 < u0:
-                value, error = quad(
-                    integrand,
-                    target_u,
-                    high,
-                    epsabs=self.options.quad_epsabs,
-                    epsrel=self.options.quad_epsrel,
-                    limit=200,
-                )
-            return value, error
-
-        phi_width, error = integrate_to(u1)
-        full_phi1 = phi0 + phi_width
-        phi1 = min(self.options.max_phi, full_phi1)
-        truncated = phi1 < full_phi1
-
-        def angle_to_u(phi: float) -> float:
-            target = phi - phi0
-            if target <= 0.0:
-                return u0
-            if target >= phi_width:
-                return u1
-
-            def residual(u: float) -> float:
-                value, _ = integrate_to(u)
-                return value - target
-
-            return brentq(residual, low, high, xtol=self.options.root_atol, rtol=self.options.root_rtol)
-
-        u_end = angle_to_u(phi1)
-        return (
-            RaySegment(
-                region=region,
-                radial_direction=direction,
-                phi_start=phi0,
-                phi_end=phi1,
-                u_start=u0,
-                u_end=u_end,
-                endpoint_event=EventType.MAX_PHI if truncated else endpoint_event,
-                evaluator=angle_to_u,
-            ),
-            error,
+        return make_quad_segment(
+            metric=metric,
+            b=b,
+            u0=u0,
+            u1=u1,
+            phi0=phi0,
+            direction=direction,
+            endpoint_event=endpoint_event,
+            region=region,
+            options=self.options,
+            safe_g=_safe_g_metric,
+            regularize_outward_start=False,
+            regularize_outward_turning_endpoint=True,
         )
 
     def _first_turning_point(self, metric, b: float, u_start: float, u_stop: float) -> float | None:
-        if math.isclose(u_start, u_stop):
-            return None
-        low, high = sorted([u_start, u_stop])
-        grid = np.linspace(low, high, self.options.max_brackets)
-        if u_stop < u_start:
-            grid = grid[::-1]
-        previous_u = float(grid[0])
-        previous_g = _safe_g_metric(metric, previous_u, b)
-        for current_u_value in grid[1:]:
-            current_u = float(current_u_value)
-            current_g = _safe_g_metric(metric, current_u, b)
-            if previous_g > 0.0 and current_g <= 0.0:
-                bracket = sorted([previous_u, current_u])
-                return brentq(
-                    lambda u: metric.G(u, b),
-                    bracket[0],
-                    bracket[1],
-                    xtol=self.options.root_atol,
-                    rtol=self.options.root_rtol,
-                )
-            previous_u = current_u
-            previous_g = current_g
-        return None
+        return _first_turning_point_scan(
+            metric,
+            b,
+            u_start,
+            u_stop,
+            self.options,
+            allow_descending=True,
+        )
+
+    def _first_turning_point_scalar(self, metric, b: float, u_start: float, u_stop: float) -> float | None:
+        return _first_turning_point_scalar_scan(
+            metric,
+            b,
+            u_start,
+            u_stop,
+            self.options,
+            allow_descending=True,
+        )
 
     def _region_boundary_u(self, region: str, direction: str) -> tuple[float, EventType]:
         metric = self.junction.metric_for_region(region)
