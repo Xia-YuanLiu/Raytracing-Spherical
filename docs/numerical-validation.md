@@ -6,10 +6,16 @@ The validation strategy is manufactured-solution testing: sample analytical
 metrics into synthetic numerical tables, trace the same benign rays through the
 analytical and tabulated paths, and compare stable public observables.
 
+Core analytical formulas are checked by a private symbolic oracle module. The
+symbolic oracle is executable test code, not a public API and not a manual
+documentation contract.
+
 ## Default Guardrails
 
 - Public API contract and representative workflows:
   `pytest tests/test_package.py -q`
+- Symbolic formula oracle for analytical metrics, redshift, and shell matching:
+  `pytest tests/test_symbolic_equation_oracles.py -q`
 - Synthetic `.npz` ingestion and `TabulatedMetric` behavior:
   `pytest tests/test_numerical_metrics.py -q`
 - Manufactured analytical-vs-tabulated validation:
@@ -26,11 +32,16 @@ Default `pytest -q` excludes `@pytest.mark.slow` tests.
 Run the slow numerical validation scaffold explicitly:
 
 ```bash
+pytest -m slow tests/test_symbolic_geodesic_oracle.py -q
 pytest -m slow tests/test_numerical_metric_validation.py -q
 ```
 
 Slow tests may expand to more grid densities or metric families, but they should
 not become a default CI requirement without a separate decision.
+
+The symbolic geodesic oracle derives Christoffel symbols from the metric tensor
+and integrates the full geodesic equation on benign finite-observer rays. It is
+intended as an independent check against mistakes in reduced ray equations.
 
 ## Compared Observables
 
