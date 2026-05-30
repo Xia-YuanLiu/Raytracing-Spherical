@@ -34,17 +34,30 @@ dimensional intensity profile before rendering a two-dimensional image.
 
 Python 3.11 or newer is required.
 
+For the core library:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .
+```
+
+For local development and validation:
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -e ".[test]"
 ```
 
-The core package depends on NumPy and SciPy. Plot and image output from the
-generation scripts also requires Matplotlib:
+The core package depends on NumPy and SciPy. The `test` extra installs pytest,
+SymPy, Matplotlib, and Pillow so the full local test suite and plotting script
+smoke tests can run in the same environment.
+
+For script-only plot/image generation without the symbolic test dependencies:
 
 ```bash
-pip install matplotlib
+pip install -e ".[plot]"
 ```
 
 ## Quick Start: Schwarzschild Thin Disk
@@ -283,7 +296,14 @@ python scripts/write_junction_atlas_report.py \
 
 ## Generated Outputs
 
-Generated artifacts are grouped under `outputs/` by experiment:
+Generated artifacts are local by default. Scripts write images, CSV files, JSON
+manifests, reports, and benchmark outputs under `outputs/`, which is ignored by
+Git for new files. Reference PDFs and other local source material belong under
+`refs/`, which is also ignored. Do not include generated outputs or reference
+PDFs in a PR unless that PR explicitly reviews and documents why they should be
+published.
+
+Common generated output groups are:
 
 - `outputs/junction_atlas/`: RN/RN-dS atlas manifest, phase maps,
   representative case profiles, images, transfer-redshift plots, and optional
@@ -297,20 +317,25 @@ Generated artifacts are grouped under `outputs/` by experiment:
 - `outputs/schwarzschild_fig5/`: Schwarzschild Fig. 5 profile and image outputs
 - `outputs/lqg_fig3/`: LQG Fig. 3 profile, image, and ring-edge outputs
 
-Some legacy root-level output files are still present for compatibility with
-earlier runs. New generated results should generally use the grouped output
-directories.
+Some legacy tracked output files may exist on older branches for compatibility
+with earlier runs. New generated results should generally use grouped output
+directories and remain local. See `docs/artifacts.md` for the artifact policy.
 
 ## Testing
 
 ```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[test]"
 pytest -q
 ```
 
 The tests cover metric quantities, observer mappings, solver events,
 Hamiltonian and transfer backend agreement, disk intersections, redshift
 weights, image sampling, static-junction shell matching, junction diagnostics,
-and the public generation scripts.
+symbolic formula oracles, and the public generation scripts. Slow validation
+scaffolds are marked with `@pytest.mark.slow` and excluded from the default
+quick run.
 
 ## Notes
 

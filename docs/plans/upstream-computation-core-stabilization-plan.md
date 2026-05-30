@@ -6,7 +6,7 @@ This is an execution plan for turning `spherical-raytracing` into a stable,
 scientifically checkable upstream computation core. It is based on:
 
 - `REPO_OVERVIEW.md`
-- `raytracing_spherical_review_roadmap.md`
+- `docs/review/raytracing-spherical-review-roadmap.md`
 - `docs/adr/0001-upstream-computation-core-api-contract.md`
 - `docs/plans/numerical-metric-validation-plan.md`
 - `docs/plans/numerical-metric-perf-plan.md`

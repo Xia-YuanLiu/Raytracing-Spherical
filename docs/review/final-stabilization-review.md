@@ -195,7 +195,7 @@ referenced by code, README, CI, tests, or review history:
 - `.github/workflows/test.yml`
 - `CHANGELOG.md`
 - `REPO_OVERVIEW.md`
-- `raytracing_spherical_review_roadmap.md`
+- `docs/review/raytracing-spherical-review-roadmap.md`
 - `scripts/benchmark_numerical_metric_perf.py`
 - `src/spherical_raytracing/_segments.py`
 - `src/spherical_raytracing/_turning.py`

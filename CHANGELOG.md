@@ -15,3 +15,5 @@
   junction transfer paths.
 - Documented artifact, numerical validation, physics convention, and API
   compatibility policies.
+- Kept generated outputs and local reference PDFs out of new PR content, and
+  moved the long review roadmap into `docs/review/`.

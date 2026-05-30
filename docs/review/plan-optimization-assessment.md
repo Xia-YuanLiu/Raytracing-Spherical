@@ -240,7 +240,7 @@ Line 716: "do not add internal batch tracing until profiling justifies it"
 1. **F6 的 P1.1 scope**：segment 重复的实际规模（~60-70 行）没有在 plan 中明确。P1 执行时应该先测量再决定提取范围。
 2. **`outputs/` 的 429 个已跟踪文件**：`.gitignore` 已排除 `outputs/`，但已跟踪的文件不会自动消失。需要 `git rm --cached` 或等 P2.1 处理。
 3. **L4 的具体容限**：plan 说 "from an initial measured baseline"，但没给出数值。执行时需要先跑一次基线测量。
-4. **`raytracing_spherical_review_roadmap.md`（34KB）**：仍然在仓库根目录，没有归档或标记。建议在 P2 中处理。
+4. **`docs/review/raytracing-spherical-review-roadmap.md`（原根目录 roadmap）**：已归档到 review 文档目录；后续仍可标记采纳状态。
 
 ### 最终结论
 
