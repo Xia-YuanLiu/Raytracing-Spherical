@@ -15,7 +15,10 @@ dependencies = [
 
 [project.optional-dependencies]
 test = [
+  "matplotlib>=3.8",
+  "Pillow>=10.0",
   "pytest>=8.0",
+  "sympy>=1.12",
 ]
 
 [tool.setuptools.packages.find]
@@ -24,3 +27,7 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+addopts = ["-m", "not slow"]
+markers = [
+  "slow: slower validation scaffolds that are excluded from default quick checks",
+]

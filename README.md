@@ -75,6 +75,76 @@ print(ray.diagnostics.termination_reason)
 print(intensity.total)
 ```
 
+## Quick Start: Numerical Metric (`.npz` Tables)
+
+For tabulated metrics supplied as `.npz` files (the Li-DM-BH ``r/f/g/B/params``
+layout, or any standard ``r/A/B`` table), use ``load_metric_npz`` together with
+``TabulatedMetric`` and a finite-radius static observer:
+
+```python
+from spherical_raytracing import (
+    DiskWindow,
+    FiniteStaticObserver,
+    QuadTransferSolver,
+    StaticDomainSelector,
+    TabulatedMetric,
+    ThinDiskSource,
+    compute_intersections,
+    load_metric_npz,
+    observed_intensity,
+)
+
+payload = load_metric_npz("hernquist_L0.npz")
+r_lo, r_hi = StaticDomainSelector().choose(payload)
+metric = TabulatedMetric(payload=payload, static_domain=(r_lo, r_hi))
+
+r_ph = metric.photon_spheres()[-1]
+r_obs = 5.0 * r_ph
+observer = FiniteStaticObserver(r_obs=r_obs, metric=metric)
+solver = QuadTransferSolver(metric=metric, observer=observer)
+
+b_crit = metric.critical_curves()[0].b_crit
+ray = solver.trace_b(b_crit * 1.05)
+
+disk = DiskWindow(r_min=r_ph * 1.05, r_max=r_obs - 0.5)
+intersections = compute_intersections(ray, disk, max_order=4)
+source = ThinDiskSource(lambda r, region=None: 1.0 / r**2)
+intensity = observed_intensity(intersections, source, metric, observer)
+```
+
+Key constraints (see ``docs/plans/数值度规接入计划.md`` for the full design):
+
+- Li-DM-BH tables are interpreted with ``A=f`` and ``C=g``; internally the
+  package interpolates ``A(r)`` and ``C(r)=1/B(r)`` with
+  ``scipy.interpolate.PchipInterpolator`` over the static-domain subarray
+  (plan decisions 1/4).
+- ``(r_boundary, 0.0)`` anchors are injected *only* at endpoints that
+  match a metadata horizon (plan decision 6 tolerance). Non-horizon
+  endpoints — e.g. the support bounds of a standard ``r/A/B`` table, or a
+  user-supplied ``StaticDomainSelector(radial_bounds=...)`` crop inside a
+  static patch — are *not* zero-anchored, so values near the bounds are
+  not distorted toward a fake horizon.
+- The standard ``r/A/B`` layout is accepted as well; in that case
+  ``payload.metadata.raw_B is None`` and the ``B*C≈1`` soft check is
+  skipped automatically (plan decision 7). Because such payloads carry
+  no metadata roots, ``TabulatedMetric.horizons()`` /
+  ``photon_spheres()`` / ``critical_curves()`` fall back to numerically
+  inferring ``A=0`` and ``r*A' - 2*A = 0`` roots from the interpolated
+  table, keeping ``b_crit`` and near-critical guards usable.
+- ``StaticDomainSelector(domain_index=..., radial_bounds=...)`` overrides
+  the default last-domain choice when needed (plan decision 5).
+- ``TabulatedMetric`` is supported *only* with ``FiniteStaticObserver`` and
+  ``OutsideTracePolicy``; combining it with ``InfinityObserver`` or
+  ``ThroughTracePolicy`` raises ``NotImplementedError`` (plan decisions
+  10/11), and ``r_obs`` must stay within the table's grid coverage.
+- Domain-out queries, queries beyond ``[r_grid_min, r_grid_max]``, and
+  ``|C| < c_tol`` queries all raise ``ValueError``; no silent NaN/inf
+  propagation into the solver (plan decision 8).
+- Expect ``TabulatedMetric`` traces to be 10–100× slower than the analytic
+  metrics per ray (PCHIP evaluation overhead). The Hamiltonian backend's
+  numerical stability for tabulated metrics is *not* guaranteed in this
+  phase—use ``QuadTransferSolver`` (or ``OdeTrajectorySolver``).
+
 ## Quick Start: Static Junction
 
 ```python
@@ -106,6 +176,16 @@ print(ray.physics_warnings)
 `StaticJunctionSpacetime` currently supports same-family static junctions:
 Schwarzschild-Schwarzschild, RN-RN, or RN-dS-RN-dS.
 
+## Stability And Validation Docs
+
+- `docs/physics-conventions.md` records coordinate, redshift, shell matching,
+  and termination-event conventions.
+- `docs/numerical-validation.md` records the manufactured-metric validation and
+  benchmark commands.
+- `docs/api-compatibility.md` records the downstream compatibility policy.
+- `docs/artifacts.md` records how generated outputs and fixtures should be
+  handled.
+
 ## Project Layout
 
 ```text
@@ -116,6 +196,9 @@ src/spherical_raytracing/
   junction_tracing.py     # Static junction transfer and Hamiltonian solvers
   junctions.py            # Shell matching, crossings, and junction diagnostics
   metrics.py              # Static spherical metrics
+  numerical_loader.py     # .npz loader and validation gate for tabulated metrics
+  numerical_metrics.py    # CanonicalPayload, LiDMBHMetadata, ValidationOptions,
+                          # StaticDomainSelector, TabulatedMetric
   observers.py            # Infinity and finite static observers
   policies.py             # Trace policy and solver options
   solvers.py              # Single-metric quadrature, ODE, and Hamiltonian solvers
