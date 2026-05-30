@@ -50,8 +50,8 @@
 | --- | --- |
 | Python | `>=3.11` |
 | 运行依赖 | `numpy>=1.26`, `scipy>=1.11` |
-| 测试依赖 | `pytest>=8.0` |
-| 绘图脚本依赖 | README 建议额外安装 `matplotlib` |
+| 绘图脚本依赖 | `.[plot]` extra：`matplotlib>=3.8`, `Pillow>=10.0` |
+| 测试依赖 | `.[test]` extra：`pytest>=8.0`, `sympy>=1.12`，以及绘图依赖 |
 | 构建 | `setuptools>=69`, `wheel` |
 | 许可证 | BSD 3-Clause |
 | `src/spherical_raytracing` | 15 个 Python 文件，5437 行 |
@@ -84,12 +84,13 @@ raytracing-spherical/
   scripts/                       # artifact 生成、atlas、benchmark 脚本
   docs/plans/                    # 数值度规接入、验证、性能计划
   notebooks/                     # RN-dS walkthrough notebook
-  refs/                          # 参考论文 PDF
+  refs/                          # 本地参考资料；默认忽略，不随 PR 发布
   LQGBHShadow/                   # 遗留 Mathematica 参考代码
-  outputs/                       # 已生成的图像、CSV、JSON artifact
+  outputs/                       # 本地生成的图像、CSV、JSON artifact；默认忽略
 ```
 
-`outputs/` 中有大量已跟踪的生成文件。审查者可以关注它们是否应作为回归基准或发布 artifact 管理，但不要把它们当作核心库实现。
+`outputs/` 和 `refs/` 是本地工作区区域。旧分支上可能有历史跟踪的输出文件；
+新的 PR 不应加入生成产物或参考 PDF，除非该 PR 明确审查并记录发布理由。
 
 ## 4. 公共 API 面
 

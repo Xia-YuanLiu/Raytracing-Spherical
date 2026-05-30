@@ -44,7 +44,7 @@ Plan reviewed: `docs/plans/upstream-computation-core-stabilization-plan.md`
 - `tests/test_static_junction_backend_agreement.py`
 - `scripts/benchmark_numerical_metric_perf.py`
 - `docs/adr/0001-upstream-computation-core-api-contract.md`
-- `raytracing_spherical_review_roadmap.md`（前 80 行）
+- `docs/review/raytracing-spherical-review-roadmap.md`（前 80 行）
 - `pyproject.toml`
 - `.gitignore`
 
@@ -292,6 +292,6 @@ Plan reviewed: `docs/plans/upstream-computation-core-stabilization-plan.md`
 
 5. **P1.3 batch tracing 是否有实际的性能瓶颈数据？** Plan 把它放在 P1，但没有证据表明成像管线中的逐 ray 调用开销是实际瓶颈。如果 `sample_radial_profile` 已经足够快，batch tracing 可能是不必要的复杂度。
 
-6. **`docs/adr/` 和 `raytracing_spherical_review_roadmap.md` 是否应该提交？** 这些文件似乎由外部审查者生成。如果它们是临时文件，应该 `.gitignore`。如果是长期治理文档，应该保留但可能放在 `docs/` 下而非仓库根目录。
+6. **`docs/adr/` 和 `docs/review/raytracing-spherical-review-roadmap.md` 是否应该提交？** 这些文件似乎由外部审查者生成。如果它们是临时文件，应该 `.gitignore`。如果是长期治理文档，应该保留但归档在 `docs/` 下，而不是仓库根目录。
 
-7. **Plan 引用了 `raytracing_spherical_review_roadmap.md` 但没有说明它与本 plan 的关系。** 这个 34KB 的文件包含了大量详细建议。如果本 plan 已经从中提炼了执行项，那个文件是否应该标记为"已采纳"或"已归档"？
+7. **Plan 引用了 `docs/review/raytracing-spherical-review-roadmap.md` 但没有说明它与本 plan 的关系。** 这个 34KB 的文件包含了大量详细建议。如果本 plan 已经从中提炼了执行项，那个文件是否应该标记为"已采纳"或"已归档"？
