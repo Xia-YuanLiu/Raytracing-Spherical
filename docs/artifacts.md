@@ -16,6 +16,9 @@ implicit test dependency or expand the repository without review.
   produced by scripts. These belong under `outputs/` during local work.
 - Historical references: previous generated outputs retained to document a paper
   figure, review, or known result. These need a note explaining why they remain.
+- Local references: papers, PDFs, private notes, or source material kept under
+  `refs/` for local reading. These should not be published unless licensing and
+  redistribution have been reviewed.
 - External/private data: Li-DM-BH files and other upstream datasets outside this
   repository. Default tests and CI must not require them.
 
@@ -26,6 +29,8 @@ implicit test dependency or expand the repository without review.
   pytest or CI.
 - Keep `outputs/` ignored for new generated files. Already tracked outputs are
   not removed by this policy; removal would be a separate reviewed change.
+- Keep `refs/` ignored for local reference material. Prefer citation metadata or
+  links over checked-in PDFs in public repository history.
 - New regression fixtures should be tiny, documented, and justified by a test
   that cannot use dynamic synthetic data.
 

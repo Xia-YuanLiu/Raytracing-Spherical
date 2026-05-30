@@ -25,16 +25,29 @@ Raytracing Spherical 是一个用于静态球对称时空中类光线追踪的 P
 
 需要 Python 3.11 或更新版本。
 
+安装核心库：
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .
+```
+
+本地开发和验证建议安装测试依赖：
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -e ".[test]"
 ```
 
-核心包依赖 NumPy 和 SciPy。如果需要运行生成脚本中的绘图和图像输出选项，还需要安装 Matplotlib：
+核心包依赖 NumPy 和 SciPy。`test` extra 会安装 pytest、SymPy、Matplotlib
+和 Pillow，因此同一个环境可以运行完整本地测试和绘图脚本 smoke test。
+
+如果只需要脚本绘图/图像输出，而不需要 symbolic 测试依赖，可以安装：
 
 ```bash
-pip install matplotlib
+pip install -e ".[plot]"
 ```
 
 ## 快速开始：Schwarzschild 薄盘
@@ -159,6 +172,13 @@ print(ray.physics_warnings)
 
 `StaticJunctionSpacetime` 目前支持同族静态 junction：Schwarzschild-Schwarzschild、RN-RN 或 RN-dS-RN-dS。
 
+## 稳定性和验证文档
+
+- `docs/physics-conventions.md` 记录坐标、红移、壳层匹配和终止事件约定。
+- `docs/numerical-validation.md` 记录 manufactured-metric 验证和 benchmark 命令。
+- `docs/api-compatibility.md` 记录下游兼容性策略。
+- `docs/artifacts.md` 记录生成产物和 fixture 的处理规则。
+
 ## 项目结构
 
 ```text
@@ -256,7 +276,12 @@ python scripts/write_junction_atlas_report.py \
 
 ## 生成输出
 
-生成产物按实验分组放在 `outputs/` 下：
+生成产物默认只保存在本地。脚本会把图像、CSV、JSON manifest、报告和
+benchmark 输出写到 `outputs/` 下；新文件会被 Git 忽略。参考 PDF 和其他本地资料
+放在 `refs/` 下，也会被 Git 忽略。除非某个 PR 明确说明并审查为什么要发布这些
+文件，否则不要把生成产物或参考 PDF 放进 PR。
+
+常见生成输出分组包括：
 
 - `outputs/junction_atlas/`：RN/RN-dS atlas 的 manifest、phase map、代表案例剖面、图像、transfer-redshift 图，以及可选的 Schwarzschild reference 产物
 - `outputs/junction_atlas_schwarzschild_reference/`：由 atlas 生成器单独生成的 Schwarzschild reference 运行结果
@@ -265,15 +290,22 @@ python scripts/write_junction_atlas_report.py \
 - `outputs/schwarzschild_fig5/`：Schwarzschild Fig. 5 剖面和图像输出
 - `outputs/lqg_fig3/`：LQG Fig. 3 剖面、图像和 ring-edge 输出
 
-仓库中仍保留了一些早期运行产生的根目录输出文件，用于兼容旧路径。新的生成结果建议放入对应的分组输出目录。
+旧分支上可能仍有一些早期运行产生的已跟踪输出文件，用于兼容旧路径。新的生成结果
+建议放入对应的分组输出目录并保持本地化。详见 `docs/artifacts.md`。
 
 ## 测试
 
 ```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[test]"
 pytest -q
 ```
 
-测试覆盖度规量、观测者映射、求解器事件、Hamiltonian 与 transfer 后端一致性、薄盘交点、红移权重、图像采样、静态 junction 壳层匹配、junction 诊断，以及公开生成脚本。
+测试覆盖度规量、观测者映射、求解器事件、Hamiltonian 与 transfer 后端一致性、
+薄盘交点、红移权重、图像采样、静态 junction 壳层匹配、junction 诊断、symbolic
+公式 oracle，以及公开生成脚本。慢速验证 scaffold 使用 `@pytest.mark.slow` 标记，
+默认快速测试会排除这些测试。
 
 ## 说明
 
