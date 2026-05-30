@@ -22,4 +22,5 @@ docs/*
 !docs/review/
 !docs/review/*.md
 outputs/
+refs/
 LQGBHShadow/
